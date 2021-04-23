@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -21,28 +21,28 @@
     <h4>To continue please Sign In</h4>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form th:action="@{/signUp}" method="post" enctype="multipart/form-data" th:object="${user}">
                 <h1>Create Account</h1>
+                <input type="file" placeholder="Profile Photo" name="avatar" accept="image/png, image/jpeg">
                 <input type="text" placeholder="First Name" name="firstName"/>
                 <input type="text" placeholder="Last Name" name="lastName"/>
                 <input type="text" placeholder="Username" name="username"/>
                 <input type="text" placeholder="Phone" name="phone"/>
                 <input type="email" placeholder="Email" name="email"/>
                 <input type="password" placeholder="Password" name="password"/>
-                <hr/>
-                <button>Sign Up</button>
+                <button type="submit">Sign Up</button>
             </form>
 
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form th:action="@{/signIn}" method="post">
                 <h1>Sign in</h1>
                 <hr/>
                 <input type="username" placeholder="Username" name="username"/>
                 <hr/>
                 <input type="password" placeholder="Password" name="password"/>
                 <hr/>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="overlay-container">

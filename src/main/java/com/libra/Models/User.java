@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,4 +22,13 @@ public class User {
     private String password;
     private String email;
     private String phone;
+    private String avatar;
+
+    @OneToMany(targetEntity=Todo.class)
+    @JoinColumn(name="todoId")
+    private List<Todo> todosList;
+
+    @OneToMany(targetEntity=Notes.class)
+    @JoinColumn(name="notesId")
+    private List<Notes> notesList;
 }

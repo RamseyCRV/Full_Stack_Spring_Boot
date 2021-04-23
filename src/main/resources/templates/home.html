@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
   <title>Libra: Home</title>
@@ -47,12 +47,12 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img src="images/avatars/avatar.jpeg" class="avatar" />
-                        <span>Guest</span>
+                        <img th:src="@{'/images/avatars/' + ${user.avatar}}" class="avatar" />
+                        <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="text-center"><span class="glyphicon glyphicon-user" href="#"></span> Profile</a></li>
-                        <li><a class="text-center"><span class="glyphicon glyphicon-log-out" href="#"></span> Logout</a></li>
+                        <li><a th:href="@{/signOut}" class="text-center"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
