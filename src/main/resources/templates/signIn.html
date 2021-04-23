@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Libra: Sign In</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <img src="images/icons/logo.png" width="80px" height="80px"  />
+    <h1>Welcome to Libra</h1>
+</head>
+
+<body>
+    <h4>To continue please Sign In</h4>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="First Name" name="firstName"/>
+                <input type="text" placeholder="Last Name" name="lastName"/>
+                <input type="text" placeholder="Username" name="username"/>
+                <input type="text" placeholder="Phone" name="phone"/>
+                <input type="email" placeholder="Email" name="email"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <hr/>
+                <button>Sign Up</button>
+            </form>
+
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Sign in</h1>
+                <hr/>
+                <input type="username" placeholder="Username" name="username"/>
+                <hr/>
+                <input type="password" placeholder="Password" name="password"/>
+                <hr/>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Have account already?</h1>
+                    <p>Click "Sign In" and login with your account.</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>You are new here?</h1>
+                    <p>Click "Sign Up" and create a new account.</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <script src="js/login.js" ></script>
+</body>
+
+</html>
