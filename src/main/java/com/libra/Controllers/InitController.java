@@ -2,8 +2,9 @@ package com.libra.Controllers;
 
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
-import com.libra.Service.UserService;
+import com.libra.Service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -11,22 +12,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class InitController {
 
-    private final static String UPLOAD_DIR="src/main/resources/static/images/avatars";
+    private final static String UPLOAD_DIR = "src/main/resources/static/images/avatars";
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @GetMapping("/signIn")
-    public String getSignInPage(){
+    public String getSignInPage() {
         return "signIn";
     }
 
@@ -38,34 +37,36 @@ public class InitController {
                            @RequestParam("phone") String phone,
                            @RequestParam("email") String email,
                            @RequestParam("password") String password)
-        throws IOException {
+            throws IOException {
+        String avatar = "";
 
-            String imageName = UUID.randomUUID().toString() + StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        if (multipartFile != null) {
+            avatar = username + ".png";
+        }
 
-            User user = new User();
-            user.setAvatar(imageName);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setUsername(username);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPhone(phone);
-            userService.saveUser(user);
-            FileUploadUtil.saveFile(UPLOAD_DIR, imageName, multipartFile);
+        User user = new User();
+        user.setAvatar(username + ".png");
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setUsername(username);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhone(phone);
+        userServiceImpl.saveUser(user);
+        FileUploadUtil.saveFile(UPLOAD_DIR, avatar, multipartFile);
 
         return "redirect:/signIn";
     }
 
     @GetMapping("/home")
-    public String getHomePage(Model model){
-        //add avatar and pass  with the model in home page
-//            List<Desktop> desktopList = desktopService.getDesktop();
-//            model.addAttribute("desktops", desktopList);
+    public String getHomePage(Model model, Authentication authentication) {
+        String userName = authentication.getName();
+        model.addAttribute("avatar", userName + ".png");
         return "home";
     }
 
     @GetMapping("/signOut")
-    public String logout(){
+    public String logout() {
         return "redirect:/signIn";
     }
 }
