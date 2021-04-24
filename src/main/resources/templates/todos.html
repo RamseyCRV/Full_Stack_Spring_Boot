@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/page.css">
+<!--  <link rel="stylesheet" href="css/todos.css">-->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
@@ -31,8 +32,8 @@
         
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/home}">Home</a></li>
-                <li class="dropdown">
+                <li><a th:href="@{/home}">Home</a></li>
+                <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Productivity
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -62,11 +63,61 @@
     
     <!-- Content -->
     <div class="container-fluid">    
-        <div class="col-sm-12"> 
-            <h1>Welcome</h1>
-            <hr/>
-            <p>Lorem ipsum, lorem ipsum</p>
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="2"> 
+                        <input type="text" class="form-control" placeholder="New Todo">
+                    </th>
+                    <th>
+                        <button class="btn btn-success" type="button">Add</button>
+                    </th>
+                    <th scope="col">
+                        <h3> <span th:text="${#authentication.getPrincipal().getUsername()}"></span> Todo's</h3>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="margin-top: 10px;">
+                    <tr>
+                        <th>Done</th>
+                        <th>Todo</th>
+                        <th>Creation Time</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>Today i will work.</td>
+                        <td>21-12-2021</td>
+                        <td>
+                            <button type="button"class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>Today i will work.</td>
+                        <td>21-12-2021</td>
+                        <td>
+                            <button type="button"class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger">Remove</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"/></td>
+                        <td>Today i will work.</td>
+                        <td>21-12-2021</td>
+                        <td>
+                            <button type="button"class="btn btn-primary">Edit</button>
+                            <button type="button" class="btn btn-danger">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+<!--<script src="js/todos.js"></script>-->
 
 </body>
 

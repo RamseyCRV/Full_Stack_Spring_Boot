@@ -24,7 +24,7 @@
             <form th:action="@{/signUp}" method="post" enctype="multipart/form-data" th:object="${user}">
                 <h1>Create Account</h1>
                 <input type="file" placeholder="Profile Photo" name="avatar" accept="image/png, image/jpeg">
-                <input type="text" placeholder="First Name" name="firstName"/>
+                <input type="text" placeholder="First Name" name="firstName" />
                 <input type="text" placeholder="Last Name" name="lastName"/>
                 <input type="text" placeholder="Username" name="username"/>
                 <input type="text" placeholder="Phone" name="phone"/>
@@ -38,7 +38,7 @@
             <form th:action="@{/signIn}" method="post">
                 <h1>Sign in</h1>
                 <hr/>
-                <input type="username" placeholder="Username" name="username"/>
+                <input type="username" placeholder="Username" name="username" autofocus/>
                 <hr/>
                 <input type="password" placeholder="Password" name="password"/>
                 <hr/>
