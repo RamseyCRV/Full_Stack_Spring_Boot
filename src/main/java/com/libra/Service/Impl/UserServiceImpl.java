@@ -2,7 +2,7 @@ package com.libra.Service.Impl;
 
 import com.libra.Models.User;
 import com.libra.Repository.UserRepository;
-import com.libra.Service.UserService;
+import com.libra.Service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements CRUDService<User> {
 
     @Autowired
     private UserRepository userRepository;
@@ -19,21 +19,24 @@ public class UserServiceImpl {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> getUsers(){
+    @Override
+    public List<User> getObjects() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findUserById(int id){
+    @Override
+    public Optional<User> findObjectById(int id) {
         return userRepository.findById(id);
     }
 
-    public void deleteUser(int id){
+    @Override
+    public void deleteObject(int id) {
         userRepository.deleteById(id);
     }
 
-    public void saveUser(User user) {
+    @Override
+    public void saveObject(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
 }

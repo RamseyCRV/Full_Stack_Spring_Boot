@@ -2,19 +2,16 @@ package com.libra.Controllers;
 
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
-import com.libra.Service.Impl.UserServiceImpl;
+import com.libra.Service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @Controller
 public class InitController {
@@ -22,7 +19,8 @@ public class InitController {
     private final static String UPLOAD_DIR = "src/main/resources/static/images/avatars";
 
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    @Qualifier("userServiceImpl")
+    private CRUDService<User> userService;
 
     @GetMapping("/signIn")
     public String getSignInPage() {
@@ -52,16 +50,14 @@ public class InitController {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhone(phone);
-        userServiceImpl.saveUser(user);
+        userService.saveObject(user);
         FileUploadUtil.saveFile(UPLOAD_DIR, avatar, multipartFile);
 
         return "redirect:/signIn";
     }
 
     @GetMapping("/home")
-    public String getHomePage(Model model, Authentication authentication) {
-        String userName = authentication.getName();
-        model.addAttribute("avatar", userName + ".png");
+    public String getHomePage() {
         return "home";
     }
 
