@@ -1,36 +1,23 @@
-(function($) {
-'use strict';
-$(function() {
-var todoListItem = $('.todo-list');
-var todoListInput = $('.todo-list-input');
-$('.todo-list-add-btn').on("click", function(event) {
-event.preventDefault();
+$('document').ready(function(){
 
-var item = $(this).prevAll('.todo-list-input').val();
+    $('table #deleteTodoBtn').on('click', function(event){
+        event.preventDefault();
+        var href = $(this).attr("href");
+        $("#confirmDeleteTodoBtn").attr('href', href);
+        $('#deleteTodoModal').modal();
+    });
 
-if (item) {
-todoListItem.append("<li>
-    <div class='form-check'><label class='form-check-label'><input class='checkbox' type='checkbox' />" + item + "<i class='input-helper'></i></label></div><i class='remove mdi mdi-close-circle-outline'></i>
-</li>");
-todoListInput.val("");
-}
+    $('table #editTodoBtn').on('click', function(event){
 
-});
+        event.preventDefault();
+        var href = $(this).attr("href");
 
-todoListItem.on('change', '.checkbox', function() {
-if ($(this).attr('checked')) {
-$(this).removeAttr('checked');
-} else {
-$(this).attr('checked', 'checked');
-}
+        $.get(href, function(todo, status){
+            $('#idEditModal').val(todo.todoId);
+            $('#newTodoEditModal').val(todo.text);
+        });
 
-$(this).closest("li").toggleClass('completed');
+        $('#editTodoModal').modal();
+    });
 
 });
-
-todoListItem.on('click', '.remove', function() {
-$(this).parent().remove();
-});
-
-});
-})(jQuery);

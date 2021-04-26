@@ -22,7 +22,4 @@ public class Notes {
     private Date date;
     private String title;
 
-    @ManyToOne(targetEntity=User.class)
-    @JoinColumn(name="id")
-    private User user;
 }
