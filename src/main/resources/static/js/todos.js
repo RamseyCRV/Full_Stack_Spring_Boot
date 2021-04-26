@@ -7,4 +7,17 @@ $('document').ready(function(){
         $('#deleteTodoModal').modal();
     });
 
+    $('table #editTodoBtn').on('click', function(event){
+
+        event.preventDefault();
+        var href = $(this).attr("href");
+
+        $.get(href, function(todo, status){
+            $('#idEditModal').val(todo.todoId);
+            $('#newTodoEditModal').val(todo.text);
+        });
+
+        $('#editTodoModal').modal();
+    });
+
 });

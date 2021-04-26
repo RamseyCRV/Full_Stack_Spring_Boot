@@ -8,12 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Controller for "Todos" page
@@ -35,7 +33,6 @@ public class TodoController {
      */
     @GetMapping("/todos")
     public String getTodos(Model model){
-
         List<Todo> todos = todoService.findAllTodosForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("todos", todos);
         return "todos";
@@ -49,7 +46,6 @@ public class TodoController {
     @PostMapping("/todos/add")
     public String addTodo(Todo todo){
         crudTodoService.saveObject(todo);
-
         return "redirect:/todos";
     }
 
@@ -61,6 +57,28 @@ public class TodoController {
     @RequestMapping(value = "/todos/deleteTodo" , method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteDesktop(int id){
         crudTodoService.deleteObject(id);
+        return "redirect:/todos";
+    }
+
+    /**
+     * Find todos by id
+     * @param id of todos
+     * @return that todos with that id
+     */
+    @RequestMapping("todos/findById")
+    @ResponseBody
+    public Optional<Todo> findTodoById(int id){
+        return crudTodoService.findObjectById(id);
+    }
+
+    /**
+     * Update todos
+     * @param todo that will be updated
+     * @return redirect to todos page
+     */
+    @RequestMapping(value = "/todos/updateTodo", method = {RequestMethod.PUT, RequestMethod.GET})
+    public String updateTodo(Todo todo){
+        crudTodoService.saveObject(todo);
         return "redirect:/todos";
     }
 }

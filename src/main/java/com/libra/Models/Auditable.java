@@ -8,15 +8,12 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * JPA Auditing
- * @param <U>
+ * @param <U> Generic parameter
  */
 @Data
 @MappedSuperclass
@@ -24,10 +21,12 @@ import java.util.Date;
 public abstract class Auditable <U> {
 
     @CreatedBy
+    @Column(updatable = false)
     protected U createdBy;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = false)
     protected Date createdDate;
 
     @LastModifiedBy
