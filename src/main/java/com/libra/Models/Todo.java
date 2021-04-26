@@ -11,14 +11,12 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Todo {
+public class Todo extends Auditable<String>{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int todoId;
     private String text;
-    private Date creationTime;
+    private boolean isDone;
 
-    @ManyToOne(targetEntity=User.class)
-    @JoinColumn(name="id")
-    private User user;
 }

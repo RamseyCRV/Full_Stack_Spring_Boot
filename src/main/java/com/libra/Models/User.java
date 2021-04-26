@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -24,11 +23,5 @@ public class User {
     private String phone;
     private String avatar;
 
-    @OneToMany(targetEntity=Todo.class)
-    @JoinColumn(name="todoId")
-    private List<Todo> todosList;
 
-    @OneToMany(targetEntity=Notes.class)
-    @JoinColumn(name="notesId")
-    private List<Notes> notesList;
 }
