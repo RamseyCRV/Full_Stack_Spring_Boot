@@ -20,4 +20,10 @@ $('document').ready(function(){
         $('#editTodoModal').modal();
     });
 
+
+    $('#workingTodoBtn').on('click', function(event){
+           $('#workingTodos').toggle();
+
+    });
+
 });
