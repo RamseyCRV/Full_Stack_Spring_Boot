@@ -39,6 +39,6 @@ public class TodoServiceImpl implements CRUDService<Todo>, TodoService {
     @Override
     public List<Todo> findAllTodosForActiveUser(String username) {
         return todoRepository.findByCreatedBy(username);
-
     }
+
 }

@@ -17,6 +17,6 @@ public class Todo extends Auditable<String>{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int todoId;
     private String text;
-    private boolean isDone;
+    private Boolean isDone;
 
 }

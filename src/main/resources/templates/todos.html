@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
@@ -10,10 +11,11 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/page.css">
-<!--  <link rel="stylesheet" href="css/todos.css">-->
+  <link rel="stylesheet" href="css/gradientsAndColors.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+
+
 </head>
 
 <body>
@@ -62,52 +64,77 @@
     </nav>
 
     <!-- Content -->
-    <div class="container-fluid">    
+    <div class="container-fluid">
         <div class="col-sm-12">
-
-            <div class="btn-group text-center col-sm-12" role="group" aria-label="Basic example">
-                <button type="button" id="workingTodoBtn" class="btn btn-primary col-sm-6">Active Todo's</button>
-                <button type="button" id="finishedTodoBtn" class="btn btn-success col-sm-6 justify-content-center">Finished Todo's</button>
-            </div>
-
             <table class="table text-center">
-                <thead>
+                <thead style="border:0" class="custom-nav-menu-color custom-color-white">
+                    <tr style="border:0">
+                        <th colspan="4" class="col-sm-12" style="border:0">
+                            <button type="button" id="workingTodoBtn" class="btn gradient-blue custom-color-white text-center col-sm-5">Active Todo's</button>
+                            <h4 class="text-center custom-color-white col-sm-2">Show & Hide</h4>
+                            <button type="button" id="finishedTodoBtn" class="btn gradient-orange custom-color-white text-center col-sm-5">Finished Todo's</button>
+                        </th>
+                    </tr>
                     <form th:action="@{/todos/add}" method="post">
-                      <tr>
-                        <th scope="col" colspan="2" class="text-center">
+                      <tr style="border:0">
+                        <th scope="col" colspan="2" class="text-center" style="border:0">
                             <input type="text" class="form-control" placeholder="New Todo" name="text">
                         </th>
-                        <th class="text-left">
-                            <button class="btn btn-success" type="submit">Add</button>
+                        <th class="text-left" style="border:0">
+                            <button class="btn btn-primary" type="submit">Add</button>
                         </th>
-                        <th scope="col" class="text-center">
+                        <th scope="col" class="text-center" style="border:0">
                             <h3> <span th:text="${#authentication.getPrincipal().getUsername()}"></span> Todo's</h3>
                         </th>
                       </tr>
                     </form>
                 </thead>
 
-                <tbody id="workingTodos">
-
-                    <tr>
-                        <th class="text-center">Todo</th>
-                        <th class="text-center">Creation Time</th>
-                        <th class="text-center">Modified Time</th>
-                        <th class="text-center">Actions</th>
+                <tbody id="activeTodos">
+                    <tr style="border:0" class="gradient-blue custom-color-white">
+                        <th colspan="4" class="text-center" style="border:0">Active Todo's</th>
                     </tr>
-                    <tr th:each="todo:${todos}" id="collapseThis">
+                    <tr style="border:0">
+                        <th class="text-center color-text-gradient-blue">Todo</th>
+                        <th class="text-center color-text-gradient-blue">Creation Time</th>
+                        <th class="text-center color-text-gradient-blue">Modified Time</th>
+                        <th class="text-center color-text-gradient-blue">Actions</th>
+                    </tr>
+                    <tr th:each="todo:${activeTodos}">
                         <td th:text="${todo.text}">-</td>
                         <td th:text="${todo.createdDate}">-</td>
                         <td th:text="${todo.lastModifiedDate}">-</td>
 
                         <td>
-                            <a th:href="@{/todos/findById/(id=${todo.todoId})}" id="isDoneTodo" class="btn btn-success">Done</a>
+                            <a th:href="@{/todos/isDone/(id=${todo.todoId})}" id="isDoneTodo" class="btn btn-success">Done</a>
                             <a th:href="@{/todos/findById/(id=${todo.todoId})}" class="btn btn-primary" id="editTodoBtn">Edit</a>
                             <a th:href="@{/todos/deleteTodo/(id=${todo.todoId})}" class="btn btn-danger" id="deleteTodoBtn">Delete</a>
                         </td>
                     </tr>
 
                 </tbody>
+                <tfoot id="inactiveTodos">
+                    <tr style="border:0" class="gradient-orange custom-color-white">
+                        <th colspan="4" class="text-center" style="border:0">Finished Todo's</th>
+                    </tr>
+                    <tr style="border:0">
+                        <th class="text-center color-text-gradient-orange">Todo</th>
+                        <th class="text-center color-text-gradient-orange">Creation Time</th>
+                        <th class="text-center color-text-gradient-orange">Modified Time</th>
+                        <th class="text-center color-text-gradient-orange">Actions</th>
+                    </tr>
+                    <tr th:each="todo:${finishedTodos}">
+                        <td class="cutted-line" th:text="${todo.text}">-</td>
+                        <td th:text="${todo.createdDate}">-</td>
+                        <td th:text="${todo.lastModifiedDate}">-</td>
+
+                        <td>
+                            <a th:href="@{/todos/isDone/(id=${todo.todoId})}" id="isDoneTodo" class="btn btn-warning custom-color-white">Restore</a>
+                            <a th:href="@{/todos/findById/(id=${todo.todoId})}" class="btn btn-primary" id="editTodoBtn">Edit</a>
+                            <a th:href="@{/todos/deleteTodo/(id=${todo.todoId})}" class="btn btn-danger" id="deleteTodoBtn">Delete</a>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -150,7 +177,7 @@
         </div>
     </div>
 
-<script src="js/todos.js"></script>
+<script src="js/todo.js"></script>
 
 </body>
 

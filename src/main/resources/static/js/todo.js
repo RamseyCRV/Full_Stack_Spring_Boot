@@ -22,8 +22,12 @@ $('document').ready(function(){
 
 
     $('#workingTodoBtn').on('click', function(event){
-           $('#workingTodos').toggle();
+           $('#activeTodos').toggle();
 
+    });
+
+    $('#finishedTodoBtn').on('click', function(event){
+           $('#inactiveTodos').toggle();
     });
 
 });

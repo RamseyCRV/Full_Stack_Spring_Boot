@@ -30,6 +30,10 @@
     width: 20px;
     height: 20px;
   }
+
+  .cutted-line{
+    text-decoration: line-through;
+  }
  
   /* On small screens, set height to 'auto' for sidenav and grid */
   @media screen and (max-width: 767px) {

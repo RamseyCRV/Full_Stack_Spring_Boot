@@ -12,4 +12,5 @@ public interface TodoService {
      * @return List<Todos>
      */
     List<Todo> findAllTodosForActiveUser(final String username);
+
 }
