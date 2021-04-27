@@ -1,11 +1,24 @@
-const signUpButton = document.getElementById('signUp');
-const signInButton = document.getElementById('signIn');
-const container = document.getElementById('container');
+$('document').ready(function(){
 
-signUpButton.addEventListener('click', () => {
-	container.classList.add("right-panel-active");
-});
+    $('table #deleteNoteBtn').on('click', function(event){
+        event.preventDefault();
+        var href = $(this).attr("href");
+        $("#confirmDeleteNoteBtn").attr('href', href);
+        $('#deleteNoteModal').modal();
+    });
 
-signInButton.addEventListener('click', () => {
-	container.classList.remove("right-panel-active");
+    $('table #showNoteBtn').on('click', function(event){
+
+        event.preventDefault();
+        var href = $(this).attr("href");
+
+        $.get(href, function(note, status){
+            $('#noteEditId').val(note.notesId);
+            $('#noteEditTitle').val(note.title);
+            $('#noteEditText').val(note.text);
+        });
+
+        $('#showNoteModal').modal();
+    });
+
 });

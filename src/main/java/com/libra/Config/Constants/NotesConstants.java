@@ -1,6 +1,6 @@
 package com.libra.Config.Constants;
 
-public class NotesConstants {
+public final class NotesConstants {
 
     public static final String MODEL_NOTES = "notes";
 

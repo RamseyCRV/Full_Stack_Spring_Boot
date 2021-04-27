@@ -2,156 +2,166 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
-  <title>Libra: Notes</title>
-  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" href="images/icons/favicon.ico">
+    <title>Libra: Notes</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/page.css">
-  <link rel="stylesheet" href="css/notes.css">
-  <link rel="stylesheet" href="css/gradientsAndColors.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="images/icons/favicon.ico">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/page.css">
+    <link rel="stylesheet" href="css/gradientsAndColors.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-    <!-- Bara de navigare -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-           
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>                        
-                </button>
-                <a class="navbar-brand" th:href="@{/home}"><img class="logo-libra" src="images/icons/logo.png" /></a>
-            </div>
-        
+<!-- Bara de navigare -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" th:href="@{/home}"><img class="logo-libra" src="images/icons/logo.png"/></a>
+        </div>
+
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/home}">Home</a></li>
                 <li class="dropdown active">
                     <a class="dropdown-toggle" data-toggle="dropdown">Productivity
-                    <span class="caret"></span></a>
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a th:href="@{/todos}">To Do's</a></li>
-                      <li><a th:href="@{/notes}">Notes</a></li>
-                      <li><a th:href="@{/calendar}">Calendar</a></li>
+                        <li><a th:href="@{/todos}">To Do's</a></li>
+                        <li><a th:href="@{/notes}">Notes</a></li>
+                        <li><a th:href="@{/calendar}">Calendar</a></li>
                     </ul>
-                  </li>
+                </li>
                 <li><a href="#">Coronavirus</a></li>
                 <li><a href="#">Stock Market</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}" class="avatar" />
+                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}"
+                             class="avatar"/>
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                        <li><a th:href="@{/signOut}" class="text-center"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-user"></span>
+                            Profile</a></li>
+                        <li><a th:href="@{/signOut}" class="text-center"><span
+                                class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
-        </div>
-    </nav>
-    
-    <!-- Content -->
-    <div class="container-fluid">    
-        <div class="col-sm-12">
-            <table class="table text-center">
-                <thead style="border:0" class="custom-nav-menu-color custom-color-white">
-                    <th style="border:0"><button class="btn btn-primary col-sm-12"><b>New Note</b></button></th>
-                    <th scope="col" class="text-center" style="border:0">
-                        <h3> <span th:text="${#authentication.getPrincipal().getUsername()}"></span> Notes</h3>
-                    </th>
-                </thead>
-                <tbody style="border:0">
-                <tr style="border:0" class="gradient-blue custom-color-white">
-                    <td style="border:0" class="text-center custom-color-white"><b>Note</b></td>
-                    <td style="border:0" class="text-center custom-color-white"><b>Action</b></td>
-                </tr>
-                <tr>
-                    <td><b>Spring Boot Tutorial</b></td>
-                    <td>
-                        <button th:href="@{/notes/findById/(id=${todo.todoId})}" class="btn btn-success">View Note</button>
-                        <button th:href="@{/notes/deleteNote/(id=${todo.todoId})}" class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
+</nav>
+
+<!-- Content -->
+<div class="container-fluid">
+    <div class="col-sm-12">
+        <table class="table text-center">
+            <thead style="border:0" class="custom-nav-menu-color custom-color-white">
+            <th style="border:0">
+                <button class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#addNewNoteModal"><b>New
+                    Note</b></button>
+            </th>
+            <th scope="col" class="text-center" style="border:0">
+                <h3><span th:text="${#authentication.getPrincipal().getUsername()}"></span> Notes</h3>
+            </th>
+            </thead>
+            <tbody style="border:0">
+            <tr style="border:0" class="gradient-blue custom-color-white">
+                <td style="border:0" class="text-center custom-color-white"><b>Note</b></td>
+                <td style="border:0" class="text-center custom-color-white"><b>Action</b></td>
+            </tr>
+            <tr th:each="note:${notes}">
+                <td class="font-weight-bold" th:text="${note.title}">-</td>
+                <td>
+                    <button th:href="@{/notes/findById/(id=${note.notesId})}" id="showNoteBtn" class="btn btn-success">
+                        View Note
+                    </button>
+                    <button th:href="@{/notes/deleteNotes/(id=${note.notesId})}" id="deleteNoteBtn"
+                            class="btn btn-danger">Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <!--Delete note modal-->
-    <div class="modal" tabindex="-1" role="dialog" id="deleteNoteModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this note?</p>
-                </div>
-                <div class="modal-footer">
-                    <a id="confirmDeleteNoteBtn" class="btn btn-primary">Delete</a>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
+<div class="modal" tabindex="-1" role="dialog" id="deleteNoteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Are you sure you want to delete this note?</p>
+            </div>
+            <div class="modal-footer">
+                <a id="confirmDeleteNoteBtn" class="btn btn-primary">Delete</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
+</div>
 
 <!--Add new note Modal -->
-    <div class="modal fade" id="addNewNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label>Enter Title</label>
-                    <input type="text">
-                    <label>Write your note</label>
-                    <input type="message">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+<div class="modal fade" id="addNewNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form th:action="@{/notes/add}" method="post">
+                    <div class="form-group">
+                        <label for="noteTitle">Title</label>
+                        <input type="text" class="form-control" id="noteTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="noteText">Note</label>
+                        <textarea class="form-control" name="text" id="noteText" rows="20"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 <!--    View your note modal-->
-    <div class="modal fade" id="viewNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <label>Enter Title</label>
-                    <input type="text">
-                    <label>Write your note</label>
-                    <input type="message">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+<div class="modal fade" id="showNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form th:action="@{/notes/updateNotes}" method="put">
+                    <div class="form-group">
+                        <label for="noteTitle">Title</label>
+                        <input type="text" class="form-control" id="noteEditTitle" name="title">
+                        <input class="form-control" id="noteEditId" name="notesId" type="hidden">
+                    </div>
+                    <div class="form-group">
+                        <label for="noteText">Note</label>
+                        <textarea class="form-control" name="text" id="noteEditText" rows="20"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 <script src="js/notes.js"></script>
 </body>
 
