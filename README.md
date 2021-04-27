@@ -8,6 +8,8 @@
 * Spring MVC
 * Spring Security
 * MySql
+* Hibernate
+* JPA
 * JQuery
 * Bootstrap
 * Thymeleaf
