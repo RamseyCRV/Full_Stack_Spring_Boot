@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,5 +39,10 @@ public class UserServiceImpl implements CRUDService<User> {
     public void saveObject(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findObjectsForActiveUser(String username) {
+        return Collections.emptyList();
     }
 }

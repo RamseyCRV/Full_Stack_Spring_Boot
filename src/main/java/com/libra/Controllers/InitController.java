@@ -1,5 +1,6 @@
 package com.libra.Controllers;
 
+import com.libra.Config.Constants.InitConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
 import com.libra.Service.CRUDService;
@@ -13,21 +14,32 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
+/**
+ * SignIn & SignUp Controller
+ */
 @Controller
 public class InitController {
 
-    private final static String UPLOAD_DIR = "src/main/resources/static/images/avatars";
-
     @Autowired
-    @Qualifier("userServiceImpl")
+    @Qualifier(InitConstants.CRUD_SERVICE_QUALIFIER)
     private CRUDService<User> userService;
 
-    @GetMapping("/signIn")
+    /**
+     * SignIn & SignUP Page
+     * @return html page
+     */
+    @GetMapping(InitConstants.URL_SIGN_IN)
     public String getSignInPage() {
-        return "signIn";
+        return InitConstants.SIGN_IN_HTML;
     }
 
-    @PostMapping(value = "/signUp")
+    /**
+     * Register user
+     * @param multipartFile avatar photo
+     * @return Redirect to SignIn page
+     * @throws IOException
+     */
+    @PostMapping(value = InitConstants.URL_SIGN_UP)
     public String saveUser(@RequestParam("avatar") MultipartFile multipartFile,
                            @RequestParam("firstName") String firstName,
                            @RequestParam("lastName") String lastName,
@@ -39,30 +51,31 @@ public class InitController {
         String avatar = "";
 
         if (multipartFile != null) {
-            avatar = username + ".png";
+            avatar = username + InitConstants.PNG_EXTENSION;
         }
 
         User user = new User();
-        user.setAvatar(username + ".png");
+        user.setAvatar(avatar);
         user.setEmail(email);
         user.setPassword(password);
         user.setUsername(username);
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setPhone(phone);
+
         userService.saveObject(user);
-        FileUploadUtil.saveFile(UPLOAD_DIR, avatar, multipartFile);
 
-        return "redirect:/signIn";
+        FileUploadUtil.saveFile(InitConstants.AVATAR_USER_PATH, avatar, multipartFile);
+
+        return InitConstants.REDIRECT_TO_SIGN_IN;
     }
 
-    @GetMapping("/home")
-    public String getHomePage() {
-        return "home";
-    }
-
-    @GetMapping("/signOut")
+    /**
+     * SingOut
+     * @return redirect to SignIn page
+     */
+    @GetMapping(InitConstants.URL_SIGN_OUT)
     public String logout() {
-        return "redirect:/signIn";
+        return InitConstants.URL_SIGN_UP;
     }
 }
