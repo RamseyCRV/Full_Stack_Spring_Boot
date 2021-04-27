@@ -34,15 +34,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/home}">Home</a></li>
-                <li class="dropdown active">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Productivity
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a th:href="@{/todos}">To Do's</a></li>
-                        <li><a th:href="@{/notes}">Notes</a></li>
-                        <li><a th:href="@{/calendar}">Calendar</a></li>
-                    </ul>
-                </li>
+                <li><a th:href="@{/todos}">Todo's</a></li>
+                <li class="active"><a th:href="@{/notes}">Notes</a></li>
                 <li><a href="#">Coronavirus</a></li>
                 <li><a href="#">Stock Market</a></li>
             </ul>
@@ -70,17 +63,19 @@
     <div class="col-sm-12">
         <table class="table text-center">
             <thead style="border:0" class="custom-nav-menu-color custom-color-white">
-            <th style="border:0">
+            <th colspan="2" style="border:0">
                 <button class="btn btn-primary col-sm-12" data-toggle="modal" data-target="#addNewNoteModal"><b>New
                     Note</b></button>
             </th>
-            <th scope="col" class="text-center" style="border:0">
+            <th colspan="2" scope="col" class="text-center" style="border:0">
                 <h3><span th:text="${#authentication.getPrincipal().getUsername()}"></span> Notes</h3>
             </th>
             </thead>
             <tbody style="border:0">
             <tr style="border:0" class="gradient-blue custom-color-white">
                 <td style="border:0" class="text-center custom-color-white"><b>Note</b></td>
+                <td style="border:0" class="text-center custom-color-white"><b>Creation Time</b></td>
+                <td style="border:0" class="text-center custom-color-white"><b>Modified Time</b></td>
                 <td style="border:0" class="text-center custom-color-white"><b>Action</b></td>
             </tr>
             <tr th:each="note:${notes}">
