@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 
-  <title>Libra: Home</title>
+  <title>Libra: Notes</title>
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,8 +11,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/page.css">
   <link rel="stylesheet" href="css/notes.css">
+  <link rel="stylesheet" href="css/gradientsAndColors.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
 </head>
@@ -65,20 +66,90 @@
     <!-- Content -->
     <div class="container-fluid">    
         <div class="col-sm-12">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Active</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
+            <table class="table text-center">
+                <thead style="border:0" class="custom-nav-menu-color custom-color-white">
+                    <th style="border:0"><button class="btn btn-primary col-sm-12"><b>New Note</b></button></th>
+                    <th scope="col" class="text-center" style="border:0">
+                        <h3> <span th:text="${#authentication.getPrincipal().getUsername()}"></span> Notes</h3>
+                    </th>
+                </thead>
+                <tbody style="border:0">
+                <tr style="border:0" class="gradient-blue custom-color-white">
+                    <td style="border:0" class="text-center custom-color-white"><b>Note</b></td>
+                    <td style="border:0" class="text-center custom-color-white"><b>Action</b></td>
+                </tr>
+                <tr>
+                    <td><b>Spring Boot Tutorial</b></td>
+                    <td>
+                        <button th:href="@{/notes/findById/(id=${todo.todoId})}" class="btn btn-success">View Note</button>
+                        <button th:href="@{/notes/deleteNote/(id=${todo.todoId})}" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<!--Delete note modal-->
+    <div class="modal" tabindex="-1" role="dialog" id="deleteNoteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this note?</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="confirmDeleteNoteBtn" class="btn btn-primary">Delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--Add new note Modal -->
+    <div class="modal fade" id="addNewNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Enter Title</label>
+                    <input type="text">
+                    <label>Write your note</label>
+                    <input type="message">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    View your note modal-->
+    <div class="modal fade" id="viewNoteModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label>Enter Title</label>
+                    <input type="text">
+                    <label>Write your note</label>
+                    <input type="message">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 <script src="js/notes.js"></script>

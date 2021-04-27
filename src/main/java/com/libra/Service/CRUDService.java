@@ -1,6 +1,7 @@
 package com.libra.Service;
 
 
+import com.libra.Models.Todo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,17 +25,24 @@ public interface CRUDService<T> {
      * @param id
      * @return Object what have that id
      */
-    public Optional<T> findObjectById(int id);
+    Optional<T> findObjectById(int id);
 
     /**
      * Delete Object T with specified id
      * @param id
      */
-    public void deleteObject(int id);
+    void deleteObject(int id);
 
     /**
      * Save Object
      * @param object
      */
-    public void saveObject(T object);
+    void saveObject(T object);
+
+    /**
+     * Find all objects for active user
+     * @param username of the active userr
+     * @return a list of objects
+     */
+    List<T> findObjectsForActiveUser(final String username);
 }
