@@ -13,4 +13,4 @@
 * Thymeleaf
 
 # Todo Page
-![]('src/main/resources/static/images/screnshoots/todo.png')
+![](src/main/resources/static/images/screnshoots/todo.png)
