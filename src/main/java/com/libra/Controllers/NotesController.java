@@ -25,8 +25,6 @@ public class NotesController {
 
     /**
      * Get notes for active user
-     * @param model to pass
-     * @return notes page
      */
     @GetMapping(NotesConstants.URL_PAGE)
     public String getNotes(Model model){
@@ -37,8 +35,7 @@ public class NotesController {
     }
 
     /**
-     * Add "notes" in DB
-     * @return redirect to notes page
+     * Add note in DB
      */
     @PostMapping(NotesConstants.URL_SAVE)
     public String addNote(Notes note){
@@ -49,7 +46,6 @@ public class NotesController {
 
     /**
      * Delete note using id
-     * @return redirect to notes page
      */
     @RequestMapping(value = NotesConstants.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteNote(int id){
@@ -60,7 +56,6 @@ public class NotesController {
 
     /**
      * Find a note using id
-     * @return redirect to note page
      */
     @RequestMapping(NotesConstants.URL_FIND_BY_ID)
     @ResponseBody
@@ -70,7 +65,6 @@ public class NotesController {
 
     /**
      * Update a note
-     * @return redirect to notes page
      */
     @RequestMapping(value = NotesConstants.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
     public String updateNote(Notes note){

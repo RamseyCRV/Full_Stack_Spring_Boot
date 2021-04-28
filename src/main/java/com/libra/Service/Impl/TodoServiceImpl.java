@@ -3,6 +3,7 @@ package com.libra.Service.Impl;
 import com.libra.Models.Todo;
 import com.libra.Repository.TodoRepository;
 import com.libra.Service.CRUDService;
+import com.libra.Service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TodoServiceImpl implements CRUDService<Todo>{
+public class TodoServiceImpl implements CRUDService<Todo>, TodoService {
 
     @Autowired
     TodoRepository todoRepository;
@@ -40,4 +41,8 @@ public class TodoServiceImpl implements CRUDService<Todo>{
         return todoRepository.findByCreatedBy(username);
     }
 
+    @Override
+    public int countAllTodosForActiveUser(String username) {
+        return todoRepository.countByCreatedBy(username);
+    }
 }

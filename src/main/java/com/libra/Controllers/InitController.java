@@ -1,5 +1,6 @@
 package com.libra.Controllers;
 
+import com.libra.Config.Constants.ConfigConstants;
 import com.libra.Config.Constants.InitConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
@@ -30,7 +31,7 @@ public class InitController {
      */
     @GetMapping(InitConstants.URL_SIGN_IN)
     public String getSignInPage() {
-        return InitConstants.SIGN_IN_HTML;
+        return InitConstants.HTML;
     }
 
     /**
@@ -48,14 +49,14 @@ public class InitController {
                            @RequestParam("email") String email,
                            @RequestParam("password") String password)
             throws IOException {
-        String avatar = "";
+        User user = new User();
 
-        if (multipartFile != null) {
-            avatar = username + InitConstants.PNG_EXTENSION;
+        if (multipartFile.getSize() > 0) {
+            String avatar = username + ConfigConstants.PNG_EXTENSION;
+            user.setAvatar(avatar);
+            FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
         }
 
-        User user = new User();
-        user.setAvatar(avatar);
         user.setEmail(email);
         user.setPassword(password);
         user.setUsername(username);
@@ -64,8 +65,6 @@ public class InitController {
         user.setPhone(phone);
 
         userService.saveObject(user);
-
-        FileUploadUtil.saveFile(InitConstants.AVATAR_USER_PATH, avatar, multipartFile);
 
         return InitConstants.REDIRECT_TO_SIGN_IN;
     }

@@ -43,7 +43,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}"
-                             class="avatar"/>
+                             class="avatar" onerror="this.src='/images/avatars/noAvatar.jpg';"/>
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -80,6 +80,8 @@
             </tr>
             <tr th:each="note:${notes}">
                 <td class="font-weight-bold" th:text="${note.title}">-</td>
+                <td th:text="${note.createdDate}">-</td>
+                <td th:text="${note.lastModifiedDate}">-</td>
                 <td>
                     <button th:href="@{/notes/findById/(id=${note.notesId})}" id="showNoteBtn" class="btn btn-success">
                         View Note

@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface NotesRepository extends JpaRepository<Notes, Integer> {
 
-    List<Notes> findByCreatedBy(String createdBy);
+    List<Notes> findByCreatedBy(final String createdBy);
+
+    int countByCreatedBy(final String username);
 }

@@ -3,6 +3,7 @@ package com.libra.Service.Impl;
 import com.libra.Models.Notes;
 import com.libra.Repository.NotesRepository;
 import com.libra.Service.CRUDService;
+import com.libra.Service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NotesServiceImpl implements CRUDService<Notes> {
+public class NotesServiceImpl implements CRUDService<Notes>, NotesService {
 
     @Autowired
     private NotesRepository notesRepository;
@@ -38,5 +39,10 @@ public class NotesServiceImpl implements CRUDService<Notes> {
     @Override
     public List<Notes> findObjectsForActiveUser(String username) {
         return notesRepository.findByCreatedBy(username);
+    }
+
+    @Override
+    public int countAllNotesForActiveUser(String username) {
+        return notesRepository.countByCreatedBy(username);
     }
 }

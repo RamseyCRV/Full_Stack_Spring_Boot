@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
-    List<Todo> findByCreatedBy(String createdBy);
+    List<Todo> findByCreatedBy(final String createdBy);
+
+    int countByCreatedBy(final String username);
 
 }

@@ -43,7 +43,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}" class="avatar" />
+                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}"
+                             class="avatar" onerror="this.src='/images/avatars/noAvatar.jpg';"/>
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">

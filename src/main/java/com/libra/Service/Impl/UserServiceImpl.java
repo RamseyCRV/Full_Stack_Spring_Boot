@@ -3,6 +3,7 @@ package com.libra.Service.Impl;
 import com.libra.Models.User;
 import com.libra.Repository.UserRepository;
 import com.libra.Service.CRUDService;
+import com.libra.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements CRUDService<User> {
+public class UserServiceImpl implements CRUDService<User>, UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -44,5 +45,15 @@ public class UserServiceImpl implements CRUDService<User> {
     @Override
     public List<User> findObjectsForActiveUser(String username) {
         return Collections.emptyList();
+    }
+
+    @Override
+    public User returnCurrentSignInUser(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+    @Override
+    public void updateUserProfile(User user) {
+        userRepository.save(user);
     }
 }

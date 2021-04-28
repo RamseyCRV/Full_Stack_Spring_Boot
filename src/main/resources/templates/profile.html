@@ -42,7 +42,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}" class="avatar" />
+                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}"
+                             class="avatar" onerror="this.src='/images/avatars/noAvatar.jpg';"/>
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -62,28 +63,24 @@
                 <div class="main-body">
 
                     <div class="row gutters-sm text-center">
-                        <div class="col-md-4 mb-3">
-                            <div class="card">
-                                <div class="card-body">
+                        <div class="col-md-12 mb-3">
+                            <div class="card col-sm-12">
+                                <div class="card-body align-items-left">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="/images/avatars/Ramsey.png" alt="Admin" class="rounded-circle" width="150">
+                                        <img th:src="@{'/images/avatars/' + ${#authentication.getPrincipal().getUsername()} + '.png'}" onerror="this.src='/images/avatars/noAvatar.jpg';" class="rounded-circle" width="150" />
                                         <div class="mt-3">
-                                            <h4>Ramsey</h4>
+                                            <h4><span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span></h4>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                 <a class="btn btn-primary col-sm-11">Edit Profile</a>
-                                </div>
-                                <div class="row">
-                                  <a class="btn btn-danger col-sm-11">Delete Account</a>
                                 </div>
                             </div>
                         </div>
 
                             <!--        Right panel with info                -->
-                        <div class="col-md-8">
-                            <h5>User Information</h5>
+                        <div class="col-md-12">
+                            <h4>
+                               User Information
+                            </h4>
                             <div class="card mb-3">
                                 <div class="card-body">
                                     <div class="row">
@@ -91,7 +88,7 @@
                                             <h6 class="mb-0">First Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Robert
+                                            <p th:text="${activeUser.firstName}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -100,7 +97,7 @@
                                             <h6 class="mb-0">Last Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            Ciapa
+                                            <p th:text="${activeUser.lastName}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -109,7 +106,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            robert.crv@icloud.com
+                                            <p th:text="${activeUser.email}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -118,7 +115,7 @@
                                             <h6 class="mb-0">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            0755945923
+                                            <p th:text="${activeUser.phone}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -127,7 +124,7 @@
                                             <h6 class="mb-0">Todo's</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            32
+                                            <p th:text="${userTodos}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -136,7 +133,17 @@
                                             <h6 class="mb-0">Notes</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            12
+                                            <p th:text="${userNotes}">-</p>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <h6 class="mb-0">Settings</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <a th:href="@{/profile/findById/(id=${activeUser.id})}" class="btn col-sm-6" id="editUserProfileBtn">Edit Profile</a>
+                                            <a class="btn col-sm-6">Delete Account</a>
                                         </div>
                                     </div>
                                 </div>
@@ -149,6 +156,43 @@
         </div>
     </div>
 
+    <!--    Edit Profile Modal-->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <label class="col-form-label">Edit Profile</label>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/profile/updateProfile}" method="post" enctype="multipart/form-data" th:object="${user}">
+                        <div class="form-group">
+                            <input class="form-control" id="idUserProfile" name="id" type="hidden">
+                            <label>Avatar</label>
+                            <input type="file" placeholder="New Profile Photo" name="avatar" accept="image/png, image/jpeg">
+                            <hr/>
+                            <label for="newFirstNameProfile">First Name</label>
+                            <input class="form-control" id="newFirstNameProfile" name="firstName">
+                            <hr/>
+                            <label for="newLastNameProfile">Last Name</label>
+                            <input class="form-control" id="newLastNameProfile" name="lastName">
+                            <hr/>
+                            <label for="newEmailProfile">Email</label>
+                            <input class="form-control" id="newEmailProfile" name="email">
+                            <hr/>
+                            <label for="newPhoneProfile">Phone</label>
+                            <input class="form-control" id="newPhoneProfile" name="phone">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Discard Changes</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="js/profile.js"></script>
 </body>
 
 </html>
