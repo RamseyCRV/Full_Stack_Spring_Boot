@@ -23,4 +23,14 @@ $('document').ready(function(){
         $('#editProfileModal').modal();
     });
 
+    $('#changePasswordProfileSubmit').on('click', function(event){
+        var newPassword = $("#newPassword").val();
+        var confirmNewPassword =$("#newPasswordConfirmation").val();
+
+        if(newPassword != confirmNewPassword){
+            alert("Passwords don't match");
+            return false;
+        }
+    })
+
 });

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.Optional;
 
@@ -99,5 +98,19 @@ public class ProfileController {
     @ResponseBody
     public Optional<User> findUserById(int id){
         return crudService.findObjectById(id);
+    }
+
+    /**
+     * Change password for user
+     */
+    @RequestMapping(value = ProfileConstants.URL_EDIT_PASSWORD, method = {RequestMethod.PUT, RequestMethod.GET})
+    public String updatePassword(@RequestParam("oldPassword") String oldPassword,
+                                              @RequestParam("newPassword") String newPassword){
+
+        if(userService.changePassword(SecurityContextHolder.getContext().getAuthentication().getName(), oldPassword, newPassword)){
+            return InitConstants.REDIRECT_TO_SIGN_OUT;
+        }else{
+            return ProfileConstants.URL_REDIRECT_TO_PAGE;
+        }
     }
 }

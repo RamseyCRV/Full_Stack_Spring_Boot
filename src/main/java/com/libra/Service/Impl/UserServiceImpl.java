@@ -56,4 +56,18 @@ public class UserServiceImpl implements CRUDService<User>, UserService {
     public void updateUserProfile(User user) {
         userRepository.save(user);
     }
+
+    @Override
+    public boolean changePassword(String username, String oldPassword, String newPassword) {
+        User user = userRepository.findUserByUsername(username);
+
+        if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())){
+            user.setPassword(newPassword);
+            saveObject(user);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
