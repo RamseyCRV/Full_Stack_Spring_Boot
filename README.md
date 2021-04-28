@@ -1,7 +1,6 @@
 # Spring Boot Application
 * Todo app 
-* Notes App 
-* Calendar App
+* Notes App
 
 # Technology
 * Spring Boot

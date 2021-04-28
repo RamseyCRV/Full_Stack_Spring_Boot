@@ -35,15 +35,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{/home}">Home</a></li>
-                <li class="dropdown active">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Productivity
-                    <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a th:href="@{/todos}">To Do's</a></li>
-                      <li><a th:href="@{/notes}">Notes</a></li>
-                      <li><a th:href="@{/calendar}">Calendar</a></li>
-                    </ul>
-                  </li>
+                <li class="active"><a th:href="@{/todos}">Todo's</a></li>
+                <li><a th:href="@{/notes}">Notes</a></li>
                 <li><a href="#">Coronavirus</a></li>
                 <li><a href="#">Stock Market</a></li>
             </ul>
