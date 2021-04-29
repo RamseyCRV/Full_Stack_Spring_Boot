@@ -11,4 +11,8 @@ public interface UserService {
     void updateUserProfile(final User user);
 
     boolean changePassword(final String username, final String oldPassword, final String newPassword);
+
+    void deleteAccount(final String username);
+
+    boolean passwordIsCorrect(final String username, final String password);
 }

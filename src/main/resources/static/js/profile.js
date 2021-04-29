@@ -33,4 +33,14 @@ $('document').ready(function(){
         }
     })
 
+     $('#deleteAccountSubmit').on('click', function(event){
+            var password = $("#deleteAccountPassword").val();
+            var confirmPassword =$("#confirmDeleteAccountPassword").val();
+
+            if(password != confirmPassword){
+                alert("Passwords don't match");
+                return false;
+            }
+     })
+
 });

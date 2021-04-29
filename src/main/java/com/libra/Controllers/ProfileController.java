@@ -19,6 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Optional;
 
+/**
+ * User Profile Controller
+ */
 @Controller
 public class ProfileController {
 
@@ -34,7 +37,6 @@ public class ProfileController {
 
     /**
      * Profile page
-     * @return profile html
      */
     @GetMapping(ProfileConstants.URL_PAGE)
     public String getProfile(Model model){
@@ -85,10 +87,13 @@ public class ProfileController {
      * Delete user account
      */
     @RequestMapping(value = ProfileConstants.URL_DELETE_USER, method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteUserAccount(int id, String password){
-        crudService.deleteObject(id);
+    public String deleteUserAccount(@RequestParam("password") String password){
+        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return InitConstants.HTML;
+        if(password != null && userService.passwordIsCorrect(username, password)){
+            userService.deleteAccount(username);
+        }
+        return ProfileConstants.URL_REDIRECT_TO_PAGE;
     }
 
     /**

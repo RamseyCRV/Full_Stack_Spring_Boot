@@ -7,7 +7,7 @@ public final class ProfileConstants {
     public final static String URL_PAGE = "/profile";
     public final static String URL_REDIRECT_TO_PAGE = "redirect:/profile";
     public final static String URL_EDIT_USER = "/profile/updateProfile";
-    public final static String URL_DELETE_USER = "/profile/deleteProfile";
+    public final static String URL_DELETE_USER = "/profile/deleteAccount";
     public final static String URL_FIND_USER_BY_ID = "profile/findById";
     public final static String URL_EDIT_PASSWORD = "/profile/updatePassword";
 

@@ -45,4 +45,9 @@ public class NotesServiceImpl implements CRUDService<Notes>, NotesService {
     public int countAllNotesForActiveUser(String username) {
         return notesRepository.countByCreatedBy(username);
     }
+
+    @Override
+    public List<Notes> deleteAllNotesByActiveUser(String username) {
+        return notesRepository.deleteByCreatedBy(username);
+    }
 }

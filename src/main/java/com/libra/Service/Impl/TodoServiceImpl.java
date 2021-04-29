@@ -45,4 +45,9 @@ public class TodoServiceImpl implements CRUDService<Todo>, TodoService {
     public int countAllTodosForActiveUser(String username) {
         return todoRepository.countByCreatedBy(username);
     }
+
+    @Override
+    public List<Todo> deleteAllTodosByActiveUser(String username) {
+        return todoRepository.deleteByCreatedBy(username);
+    }
 }

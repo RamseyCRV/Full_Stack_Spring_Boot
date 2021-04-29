@@ -13,4 +13,6 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     int countByCreatedBy(final String username);
 
+    List<Todo> deleteByCreatedBy(final String createdBy);
+
 }

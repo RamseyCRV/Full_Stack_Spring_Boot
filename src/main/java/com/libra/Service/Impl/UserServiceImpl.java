@@ -3,6 +3,8 @@ package com.libra.Service.Impl;
 import com.libra.Models.User;
 import com.libra.Repository.UserRepository;
 import com.libra.Service.CRUDService;
+import com.libra.Service.NotesService;
+import com.libra.Service.TodoService;
 import com.libra.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +19,10 @@ public class UserServiceImpl implements CRUDService<User>, UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private NotesService notesService;
+    @Autowired
+    private TodoService todoService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -61,11 +67,30 @@ public class UserServiceImpl implements CRUDService<User>, UserService {
     public boolean changePassword(String username, String oldPassword, String newPassword) {
         User user = userRepository.findUserByUsername(username);
 
-        if(bCryptPasswordEncoder.matches(oldPassword, user.getPassword())){
+        if (bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
             user.setPassword(newPassword);
             saveObject(user);
             return true;
-        }else{
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public void deleteAccount(String username) {
+        User user = userRepository.findUserByUsername(username);
+        notesService.deleteAllNotesByActiveUser(username);
+        todoService.deleteAllTodosByActiveUser(username);
+        deleteObject(user.getId());
+    }
+
+    @Override
+    public boolean passwordIsCorrect(String username, String password) {
+        User user = userRepository.findUserByUsername(username);
+
+        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
+            return true;
+        } else {
             return false;
         }
     }
