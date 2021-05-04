@@ -20,6 +20,6 @@
 ![](src/main/resources/static/images/screnshoots/notes1.png)
 # SignIn & SignUp 
 ![](src/main/resources/static/images/screnshoots/signIn.png)
-![](src/main/resources/static/images/screnshoots/signUp.png)
+![](src/main/resources/static/images/screnshoots/singnUp.png)
 # Profile
 ![](src/main/resources/static/images/screnshoots/profile.png)
