@@ -1,5 +1,6 @@
 package com.libra;
 
+import com.libra.Config.Constants.InitConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         ,"/avatar/**","/css/**","/icons/**","/images/**",
                         "/Products/**",  "/js/**"
                 ).permitAll().anyRequest().authenticated()
-                .and().formLogin().loginPage("/signIn")
+                .and().formLogin().loginPage(InitConstants.URL_SIGN_IN)
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
@@ -65,7 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 }).permitAll().and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/signOut"))
-                .logoutSuccessUrl("/signIn").permitAll();
+                .logoutSuccessUrl("/signIn").permitAll()
+                .and().logout();
     }
 
 

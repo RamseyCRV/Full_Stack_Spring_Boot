@@ -11,7 +11,9 @@ public final class TodoConstants {
     public static final String URL_SAVE = "/todos/add";
     public static final String URL_UPDATE = "/todos/updateTodo";
     public static final String URL_IS_DONE = "/todos/isDone/";
+
     public static final String HTML = "todos";
+
     public static final String REDIRECT_TO_TODOS = "redirect:/todos";
 
     public static final String CRUD_SERVICE_QUALIFIER = "todoServiceImpl";

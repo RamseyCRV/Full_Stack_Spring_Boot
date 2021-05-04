@@ -5,10 +5,7 @@ import com.libra.Config.Constants.InitConstants;
 import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
-import com.libra.Service.CRUDService;
-import com.libra.Service.NotesService;
-import com.libra.Service.TodoService;
-import com.libra.Service.UserService;
+import com.libra.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,13 +24,15 @@ public class ProfileController {
 
     @Autowired
     @Qualifier(ProfileConstants.CRUD_SERVICE_QUALIFIER)
-    public CRUDService <User> crudService;
+    private CRUDService <User> crudService;
     @Autowired
-    public UserService userService;
+    private UserService userService;
     @Autowired
-    public NotesService notesService;
+    private NotesService notesService;
     @Autowired
-    public TodoService todoService;
+    private TodoService todoService;
+    @Autowired
+    private DeleteAccountsService deleteAccountsService;
 
     /**
      * Profile page
@@ -57,12 +56,11 @@ public class ProfileController {
      * Update user profile
      */
     @PostMapping(value = ProfileConstants.URL_EDIT_USER)
-    public String editUser(@RequestParam("avatar") MultipartFile multipartFile,
-                           @RequestParam("id") int id,
-                           @RequestParam("firstName") String firstName,
-                           @RequestParam("lastName") String lastName,
-                           @RequestParam("phone") String phone,
-                           @RequestParam("email") String email)
+    public String editUser(@RequestParam(ProfileConstants.PARAM_AVATAR) MultipartFile multipartFile,
+                           @RequestParam(ProfileConstants.PARAM_FIRST_NAME) String firstName,
+                           @RequestParam(ProfileConstants.PARAM_LAST_NAME) String lastName,
+                           @RequestParam(ProfileConstants.PARAM_PHONE) String phone,
+                           @RequestParam(ProfileConstants.PARAM_EMAIL) String email)
             throws IOException {
 
         User user = userService.returnCurrentSignInUser(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -73,6 +71,7 @@ public class ProfileController {
             user.setAvatar(avatar);
             FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
         }
+
         user.setPhone(phone);
         user.setEmail(email);
         user.setFirstName(firstName);
@@ -84,14 +83,15 @@ public class ProfileController {
     }
 
     /**
-     * Delete user account
+     * Validate Delete user account
      */
-    @RequestMapping(value = ProfileConstants.URL_DELETE_USER, method = {RequestMethod.DELETE, RequestMethod.GET})
-    public String deleteUserAccount(@RequestParam("password") String password){
+    @GetMapping(ProfileConstants.URL_DELETE_USER)
+    public String validateDeleteUserAccount(@RequestParam(ProfileConstants.PARAM_PASSWORD) String password){
         final String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
         if(password != null && userService.passwordIsCorrect(username, password)){
-            userService.deleteAccount(username);
+            deleteAccountsService.addAccountForDelete(username);
+            return InitConstants.REDIRECT_TO_SIGN_OUT;
         }
         return ProfileConstants.URL_REDIRECT_TO_PAGE;
     }
@@ -109,8 +109,8 @@ public class ProfileController {
      * Change password for user
      */
     @RequestMapping(value = ProfileConstants.URL_EDIT_PASSWORD, method = {RequestMethod.PUT, RequestMethod.GET})
-    public String updatePassword(@RequestParam("oldPassword") String oldPassword,
-                                              @RequestParam("newPassword") String newPassword){
+    public String updatePassword(@RequestParam(ProfileConstants.PARAM_OLD_PASSWORD) String oldPassword,
+                                 @RequestParam(ProfileConstants.PARAM_NEW_PASSWORD) String newPassword){
 
         if(userService.changePassword(SecurityContextHolder.getContext().getAuthentication().getName(), oldPassword, newPassword)){
             return InitConstants.REDIRECT_TO_SIGN_OUT;
@@ -118,4 +118,6 @@ public class ProfileController {
             return ProfileConstants.URL_REDIRECT_TO_PAGE;
         }
     }
+
+
 }

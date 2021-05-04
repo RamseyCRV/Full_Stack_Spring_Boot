@@ -2,12 +2,17 @@ package com.libra.Controllers;
 
 import com.libra.Config.Constants.ConfigConstants;
 import com.libra.Config.Constants.InitConstants;
+import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
 import com.libra.Service.CRUDService;
+import com.libra.Service.UserService;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +28,7 @@ public class InitController {
 
     @Autowired
     @Qualifier(InitConstants.CRUD_SERVICE_QUALIFIER)
-    private CRUDService<User> userService;
+    private CRUDService<User> crudService;
 
     /**
      * SignIn & SignUP Page
@@ -31,6 +36,7 @@ public class InitController {
      */
     @GetMapping(InitConstants.URL_SIGN_IN)
     public String getSignInPage() {
+
         return InitConstants.HTML;
     }
 
@@ -41,13 +47,13 @@ public class InitController {
      * @throws IOException
      */
     @PostMapping(value = InitConstants.URL_SIGN_UP)
-    public String saveUser(@RequestParam("avatar") MultipartFile multipartFile,
-                           @RequestParam("firstName") String firstName,
-                           @RequestParam("lastName") String lastName,
-                           @RequestParam("username") String username,
-                           @RequestParam("phone") String phone,
-                           @RequestParam("email") String email,
-                           @RequestParam("password") String password)
+    public String saveUser(@RequestParam(ProfileConstants.PARAM_AVATAR) MultipartFile multipartFile,
+                           @RequestParam(ProfileConstants.PARAM_FIRST_NAME) String firstName,
+                           @RequestParam(ProfileConstants.PARAM_LAST_NAME) String lastName,
+                           @RequestParam(ProfileConstants.PARAM_USERNAME) String username,
+                           @RequestParam(ProfileConstants.PARAM_PHONE) String phone,
+                           @RequestParam(ProfileConstants.PARAM_EMAIL) String email,
+                           @RequestParam(ProfileConstants.PARAM_PASSWORD) String password)
             throws IOException {
         User user = new User();
 
@@ -64,7 +70,7 @@ public class InitController {
         user.setLastName(lastName);
         user.setPhone(phone);
 
-        userService.saveObject(user);
+        crudService.saveObject(user);
 
         return InitConstants.REDIRECT_TO_SIGN_IN;
     }
