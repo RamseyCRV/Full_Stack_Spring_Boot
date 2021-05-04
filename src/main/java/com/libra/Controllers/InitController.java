@@ -6,13 +6,9 @@ import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
 import com.libra.Service.CRUDService;
-import com.libra.Service.UserService;
-import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +28,6 @@ public class InitController {
 
     /**
      * SignIn & SignUP Page
-     * @return html page
      */
     @GetMapping(InitConstants.URL_SIGN_IN)
     public String getSignInPage() {
@@ -43,8 +38,6 @@ public class InitController {
     /**
      * Register user
      * @param multipartFile avatar photo
-     * @return Redirect to SignIn page
-     * @throws IOException
      */
     @PostMapping(value = InitConstants.URL_SIGN_UP)
     public String saveUser(@RequestParam(ProfileConstants.PARAM_AVATAR) MultipartFile multipartFile,

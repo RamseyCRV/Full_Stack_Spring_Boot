@@ -4,7 +4,7 @@ import java.nio.file.*;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileUploadUtil {
+public final class FileUploadUtil {
 
     public static void saveFile(String uploadDir, String fileName,
                                 MultipartFile multipartFile) throws IOException {

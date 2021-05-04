@@ -1,7 +1,6 @@
 package com.libra.Repository;
 
 import com.libra.Models.Notes;
-import com.libra.Models.Todo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

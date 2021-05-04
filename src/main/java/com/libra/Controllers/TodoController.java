@@ -27,8 +27,6 @@ public class TodoController {
 
     /**
      * Load all todos on page for authenticated user
-     * @param model to pass
-     * @return todo page
      */
     @GetMapping(TodoConstants.URL_PAGE)
     public String getTodos(Model model){
@@ -54,7 +52,6 @@ public class TodoController {
 
     /**
      * Add todo to DB
-     * @return redirect to todos page
      */
     @PostMapping(TodoConstants.URL_SAVE)
     public String addTodo(Todo todo){
@@ -65,7 +62,6 @@ public class TodoController {
 
     /**
      * Delete todo
-     * @return Redirect to todo page
      */
     @RequestMapping(value = TodoConstants.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteTodo(int id){
@@ -75,8 +71,7 @@ public class TodoController {
     }
 
     /**
-     * Find todos by id
-     * @return todo with that id
+     * Find todo by id
      */
     @RequestMapping(TodoConstants.URL_FIND_BY_ID)
     @ResponseBody
@@ -85,8 +80,7 @@ public class TodoController {
     }
 
     /**
-     * Update todos
-     * @return redirect to todos page
+     * Update todo
      */
     @RequestMapping(value = TodoConstants.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
     public String updateTodo(Todo todo){
@@ -97,7 +91,6 @@ public class TodoController {
 
     /**
      * If user press "Done" & "Restore" than update the value
-     * @return redirect to todos
      */
     @RequestMapping(value = TodoConstants.URL_IS_DONE, method = {RequestMethod.PUT, RequestMethod.GET})
     public String isDone(int id){

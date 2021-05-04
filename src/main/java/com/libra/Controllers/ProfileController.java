@@ -97,15 +97,6 @@ public class ProfileController {
     }
 
     /**
-     * Find user by id
-     */
-    @RequestMapping(ProfileConstants.URL_FIND_USER_BY_ID)
-    @ResponseBody
-    public Optional<User> findUserById(int id){
-        return crudService.findObjectById(id);
-    }
-
-    /**
      * Change password for user
      */
     @RequestMapping(value = ProfileConstants.URL_EDIT_PASSWORD, method = {RequestMethod.PUT, RequestMethod.GET})
@@ -118,6 +109,5 @@ public class ProfileController {
             return ProfileConstants.URL_REDIRECT_TO_PAGE;
         }
     }
-
 
 }
