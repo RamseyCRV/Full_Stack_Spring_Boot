@@ -1,12 +1,5 @@
 $('document').ready(function(){
 
-//    $('table #deleteNoteBtn').on('click', function(event){
-//        event.preventDefault();
-//        var href = $(this).attr("href");
-//        $("#confirmDeleteNoteBtn").attr('href', href);
-//        $('#deleteNoteModal').modal();
-//    });
-
     $('#editUserProfileBtn').on('click', function(event){
 
         event.preventDefault();

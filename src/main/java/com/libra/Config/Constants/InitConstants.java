@@ -7,10 +7,12 @@ public final class InitConstants {
     public static final String URL_SIGN_IN = "/signIn";
     public static final String URL_SIGN_UP = "/signUp";
     public static final String URL_SIGN_OUT = "/signOut";
+    public static final String URL_CHECK_IF_USERNAME_IS_AVAILABLE = "/checkTheUsername";
 
     public static final String REDIRECT_TO_SIGN_IN = "redirect:/signIn";
     public static final String REDIRECT_TO_SIGN_OUT = "redirect:/signOut";
 
     public static final String CRUD_SERVICE_QUALIFIER = "userServiceImpl";
+
 
 }

@@ -6,12 +6,12 @@ import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Models.User;
 import com.libra.Service.CRUDService;
+import com.libra.Service.UserService;
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,6 +25,8 @@ public class InitController {
     @Autowired
     @Qualifier(InitConstants.CRUD_SERVICE_QUALIFIER)
     private CRUDService<User> crudService;
+    @Autowired
+    private UserService userService;
 
     /**
      * SignIn & SignUP Page
@@ -70,10 +72,19 @@ public class InitController {
 
     /**
      * SingOut
-     * @return redirect to SignIn page
      */
     @GetMapping(InitConstants.URL_SIGN_OUT)
     public String logout() {
         return InitConstants.URL_SIGN_UP;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = InitConstants.URL_CHECK_IF_USERNAME_IS_AVAILABLE, method = RequestMethod.POST, produces = "application/json")
+    public String checkIfUsernameIsAvailable(@RequestParam("username") String username){
+        if(BooleanUtils.isTrue(userService.checkIfUsernameExist(username))){
+            return "{data: 'AVAILABLE'}";
+        }else{
+            return "{data: 'NOT'}";
+        }
     }
 }

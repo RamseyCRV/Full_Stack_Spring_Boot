@@ -15,4 +15,6 @@ public interface UserService {
     void deleteAccount(final String username);
 
     boolean passwordIsCorrect(final String username, final String password);
+
+    boolean checkIfUsernameExist(final String username);
 }

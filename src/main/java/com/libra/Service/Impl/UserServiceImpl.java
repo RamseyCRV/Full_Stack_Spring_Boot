@@ -95,4 +95,13 @@ public class UserServiceImpl implements CRUDService<User>, UserService {
         }
     }
 
+    @Override
+    public boolean checkIfUsernameExist(String username) {
+        if(userRepository.findUserByUsername(username) != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
