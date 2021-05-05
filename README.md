@@ -18,8 +18,8 @@
 # Notes Page
 ![](src/main/resources/static/images/screnshoots/notes.png)
 ![](src/main/resources/static/images/screnshoots/notes1.png)
-#SignIn & SignUp 
+# SignIn & SignUp 
 ![](src/main/resources/static/images/screnshoots/signIn.png)
-![](src/main/resources/static/images/screnshoots/signUp.png)
-#Profile
+![](src/main/resources/static/images/screnshoots/singUp.png)
+# Profile
 ![](src/main/resources/static/images/screnshoots/profile.png)
