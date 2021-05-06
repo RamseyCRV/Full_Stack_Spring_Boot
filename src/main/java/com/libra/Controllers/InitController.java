@@ -11,6 +11,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,26 +49,31 @@ public class InitController {
                            @RequestParam(ProfileConstants.PARAM_USERNAME) String username,
                            @RequestParam(ProfileConstants.PARAM_PHONE) String phone,
                            @RequestParam(ProfileConstants.PARAM_EMAIL) String email,
-                           @RequestParam(ProfileConstants.PARAM_PASSWORD) String password)
+                           @RequestParam(ProfileConstants.PARAM_PASSWORD) String password,
+                           Model model)
             throws IOException {
         User user = new User();
 
-        if (multipartFile.getSize() > 0) {
-            String avatar = username + ConfigConstants.PNG_EXTENSION;
-            user.setAvatar(avatar);
-            FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
+        if (BooleanUtils.isTrue(userService.checkIfUsernameExist(username))) {
+            return InitConstants.REDIRECT_TO_SIGN_UP_ERROR;
+
+        } else {
+            if (multipartFile.getSize() > 0) {
+                String avatar = username + ConfigConstants.PNG_EXTENSION;
+                user.setAvatar(avatar);
+                FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
+            }
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setUsername(username);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPhone(phone);
+
+            crudService.saveObject(user);
+
+            return InitConstants.REDIRECT_TO_SIGN_IN;
         }
-
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setUsername(username);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhone(phone);
-
-        crudService.saveObject(user);
-
-        return InitConstants.REDIRECT_TO_SIGN_IN;
     }
 
     /**
@@ -78,13 +84,12 @@ public class InitController {
         return InitConstants.URL_SIGN_UP;
     }
 
-    @ResponseBody
-    @RequestMapping(value = InitConstants.URL_CHECK_IF_USERNAME_IS_AVAILABLE, method = RequestMethod.POST, produces = "application/json")
-    public String checkIfUsernameIsAvailable(@RequestParam("username") String username){
-        if(BooleanUtils.isTrue(userService.checkIfUsernameExist(username))){
-            return "{data: 'AVAILABLE'}";
-        }else{
-            return "{data: 'NOT'}";
-        }
+    /**
+     * Username is already taken
+     */
+    @GetMapping(InitConstants.URL_ERROR_SIGN_UP)
+    public String errorSignUp(){
+        return InitConstants.HTML_ERROR;
     }
+
 }

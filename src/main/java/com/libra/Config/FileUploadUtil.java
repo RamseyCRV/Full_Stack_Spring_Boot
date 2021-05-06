@@ -1,10 +1,14 @@
 package com.libra.Config;
 import java.io.*;
 import java.nio.file.*;
+import java.util.logging.Logger;
 
+import com.libra.Config.Constants.ConfigConstants;
 import org.springframework.web.multipart.MultipartFile;
 
 public final class FileUploadUtil {
+
+    private static final Logger LOG = Logger.getLogger(String.valueOf(FileUploadUtil.class));
 
     public static void saveFile(String uploadDir, String fileName,
                                 MultipartFile multipartFile) throws IOException {
@@ -25,22 +29,21 @@ public final class FileUploadUtil {
     public static void deleteImage(final String imageName){
         try
         {
-            Files.deleteIfExists(Paths.get("src/main/resources/static/images/avatars/" + imageName));
+            Files.deleteIfExists(Paths.get(ConfigConstants.AVATAR_USER_PATH + imageName));
         }
         catch(NoSuchFileException e)
         {
-            System.out.println("No such file/directory exists");
+            LOG.info("No such file/directory exists when try to delete " + imageName);
         }
         catch(DirectoryNotEmptyException e)
         {
-            System.out.println("Directory is not empty.");
+            LOG.info("Directory is not empty when try to delete " + imageName);
         }
         catch(IOException e)
         {
-            System.out.println("Invalid permissions.");
+            LOG.info("Invalid permissions when try to delete " + imageName);
         }
 
-        System.out.println("Deletion successful.");
     }
 
 }

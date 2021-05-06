@@ -1,5 +1,6 @@
 package com.libra;
 
+import com.libra.Config.Constants.HomeConstants;
 import com.libra.Config.Constants.InitConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -49,24 +50,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/errorSignUp",
+                        "/resources/**","/avatar/**","/css/**",
+                        "/icons/**","/images/**", "/Products/**",  "/js/**")
+                .permitAll()
                 .antMatchers(
-                        "/signIn", "/signUp", "/resources/**"
+                        "/signIn", "/signUp" ,"/resources/**"
                         ,"/avatar/**","/css/**","/icons/**","/images/**",
                         "/Products/**",  "/js/**"
-                ).permitAll().anyRequest().authenticated()
-                .and().formLogin().loginPage(InitConstants.URL_SIGN_IN)
+                ).permitAll()
+                .anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage(InitConstants.URL_SIGN_IN)
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
                     {
-                        redirectStrategy.sendRedirect(request, response, "/home");
+                        redirectStrategy.sendRedirect(request, response, HomeConstants.URL_HOME);
                     }
                 }).permitAll().and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/signOut"))
-                .logoutSuccessUrl("/signIn").permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher(InitConstants.URL_SIGN_OUT))
+                .logoutSuccessUrl(InitConstants.URL_SIGN_IN).permitAll()
                 .and().logout();
     }
-
 
 }
