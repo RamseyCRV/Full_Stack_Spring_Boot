@@ -1,7 +1,6 @@
 package com.libra;
 
-import com.libra.Config.Constants.HomeConstants;
-import com.libra.Config.Constants.InitConstants;
+import com.libra.Config.LibraConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,17 +60,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .loginPage(InitConstants.URL_SIGN_IN)
+                .loginPage(LibraConstants.InitConstants.URL_SIGN_IN)
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
                     {
-                        redirectStrategy.sendRedirect(request, response, HomeConstants.URL_HOME);
+                        redirectStrategy.sendRedirect(request, response, LibraConstants.HomeConstants.URL_HOME);
                     }
                 }).permitAll().and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher(InitConstants.URL_SIGN_OUT))
-                .logoutSuccessUrl(InitConstants.URL_SIGN_IN).permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher(LibraConstants.InitConstants.URL_SIGN_OUT))
+                .logoutSuccessUrl(LibraConstants.InitConstants.URL_SIGN_IN).permitAll()
                 .and().logout();
     }
 

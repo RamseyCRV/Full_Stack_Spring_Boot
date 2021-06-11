@@ -1,9 +1,9 @@
 package com.libra.Controllers;
 
-import com.libra.Config.Constants.ConfigConstants;
-import com.libra.Config.Constants.InitConstants;
-import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
+import com.libra.Config.LibraConstants.ProfileConstants;
+import com.libra.Config.LibraConstants.ConfigConstants;
+import com.libra.Config.LibraConstants.InitConstants;
 import com.libra.Models.User;
 import com.libra.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;

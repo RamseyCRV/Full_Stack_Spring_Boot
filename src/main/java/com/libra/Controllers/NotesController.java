@@ -1,6 +1,6 @@
 package com.libra.Controllers;
 
-import com.libra.Config.Constants.NotesConstants;
+import com.libra.Config.LibraConstants.NotesConstants;
 import com.libra.Models.Notes;
 import com.libra.Service.CRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
