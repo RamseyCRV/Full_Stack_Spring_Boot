@@ -17,7 +17,7 @@
 
 <body>
     <!-- Bara de navigare -->
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar">
         <div class="container-fluid">
            
             <div class="navbar-header">
@@ -58,8 +58,46 @@
     <div class="container-fluid">    
         <div class="col-sm-12"> 
             <h1>Welcome</h1>
-            <hr/>
-            <p>Lorem ipsum, lorem ipsum</p>
+            <table class="table text-center">
+                <tbody style="border:0">
+                <tr th:each="news:${newsApi}">
+                    <tr>
+<!--                        <th th:text="${news.getTitle()}" colspan="3">${news.title}</th>-->
+                    </tr>
+<!--                    <tr>-->
+<!--                        <td colspan="2" rowspan="3">IMAGINE</td>-->
+<!--                        <td th:text="${news.author}">${news.author}</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td th:text="${news.description}">${news.description}</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td th:text="${news.content}">${news.content}</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td th:text="${news.source.name}" colspan="3">${news.source.name}</td>-->
+<!--                    </tr>-->
+                </tr>
+
+<!--                        <tr th:text="${news.title}" colspan="3">-</tr>-->
+
+<!--                    <tr>-->
+<!--                        <td colspan="2" rowspan="3"><img th:src="${news.urlToImage}"/></td>-->
+<!--                        <td th:text="${news.author}">-</td>-->
+
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td th:text="${news.description}">-</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td th:text="${news.content}">-</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td colspan="3" th:text="${news.source.name}">-</td>-->
+<!--                    </tr>-->
+<!--                </tr>-->
+                </tbody>
+            </table>
     </div>
 
 </body>
