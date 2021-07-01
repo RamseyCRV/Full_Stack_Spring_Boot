@@ -1,12 +1,12 @@
 package com.libra.Controllers;
 
-import com.libra.Config.Constants.ConfigConstants;
-import com.libra.Config.Constants.InitConstants;
-import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
+import com.libra.Config.LibraConstants.InitConstants;
+import com.libra.Config.LibraConstants.ProfileConstants;
+import com.libra.Config.LibraConstants.ConfigConstants;
 import com.libra.Models.User;
-import com.libra.Service.CRUDService;
-import com.libra.Service.UserService;
+import com.libra.Service.Interface.CrudService;
+import com.libra.Service.Interface.UserService;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,7 +25,7 @@ public class InitController {
 
     @Autowired
     @Qualifier(InitConstants.CRUD_SERVICE_QUALIFIER)
-    private CRUDService<User> crudService;
+    private CrudService<User> crudService;
     @Autowired
     private UserService userService;
 

@@ -1,8 +1,8 @@
 package com.libra.Controllers;
 
-import com.libra.Config.Constants.TodoConstants;
+import com.libra.Config.LibraConstants.TodoConstants;
 import com.libra.Models.Todo;
-import com.libra.Service.CRUDService;
+import com.libra.Service.Interface.CrudService;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +23,7 @@ public class TodoController {
 
     @Autowired
     @Qualifier(TodoConstants.CRUD_SERVICE_QUALIFIER)
-    CRUDService<Todo> crudTodoService;
+    CrudService<Todo> crudTodoService;
 
     /**
      * Load all todos on page for authenticated user

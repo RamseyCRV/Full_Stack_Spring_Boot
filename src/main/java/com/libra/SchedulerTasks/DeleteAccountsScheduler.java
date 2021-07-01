@@ -1,7 +1,7 @@
 package com.libra.SchedulerTasks;
 
-import com.libra.Config.Constants.ConfigConstants;
-import com.libra.Service.DeleteAccountsService;
+import com.libra.Config.LibraConstants;
+import com.libra.Service.Interface.DeleteAccountsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,11 +24,11 @@ public class DeleteAccountsScheduler {
 
     @Scheduled(fixedRate = FIVE_MINUTES)
     public void scheduleDeleteAccounts(){
-        LOG.info(ConfigConstants.DELETE_ACCOUNTS_SCHEDULER_START + new Date());
+        LOG.info(LibraConstants.ConfigConstants.DELETE_ACCOUNTS_SCHEDULER_START + new Date());
 
         deleteAccount.deleteAllAccounts();
 
-        LOG.info(ConfigConstants.DELETE_ACCOUNTS_SCHEDULER_FINISHED + new Date());
+        LOG.info(LibraConstants.ConfigConstants.DELETE_ACCOUNTS_SCHEDULER_FINISHED + new Date());
 
     }
 

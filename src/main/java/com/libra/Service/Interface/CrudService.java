@@ -1,6 +1,7 @@
-package com.libra.Service;
+package com.libra.Service.Interface;
 
 
+import com.libra.Models.Notes;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
  * CRUD Service
  */
 @Service
-public interface CRUDService<T> {
+public interface CrudService<T> {
 
     /**
      * Return objects T from Database
@@ -37,4 +38,8 @@ public interface CRUDService<T> {
      * @param username of the active user
      */
     List<T> findObjectsForActiveUser(final String username);
+
+    int countAllObjectsForActiveUser(final String username);
+
+    List<T> deleteAllObjectsByActiveUser(final String username);
 }

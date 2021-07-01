@@ -1,4 +1,4 @@
-package com.libra.Service;
+package com.libra.Service.Interface;
 
 import com.libra.Models.User;
 import org.springframework.stereotype.Service;

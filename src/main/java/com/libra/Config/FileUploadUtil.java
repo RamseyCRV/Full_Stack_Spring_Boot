@@ -3,7 +3,6 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.logging.Logger;
 
-import com.libra.Config.Constants.ConfigConstants;
 import org.springframework.web.multipart.MultipartFile;
 
 public final class FileUploadUtil {
@@ -29,7 +28,7 @@ public final class FileUploadUtil {
     public static void deleteImage(final String imageName){
         try
         {
-            Files.deleteIfExists(Paths.get(ConfigConstants.AVATAR_USER_PATH + imageName));
+            Files.deleteIfExists(Paths.get(LibraConstants.ConfigConstants.AVATAR_USER_PATH + imageName));
         }
         catch(NoSuchFileException e)
         {

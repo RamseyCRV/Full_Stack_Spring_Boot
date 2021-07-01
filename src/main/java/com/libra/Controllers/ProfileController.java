@@ -1,11 +1,11 @@
 package com.libra.Controllers;
 
-import com.libra.Config.Constants.ConfigConstants;
-import com.libra.Config.Constants.InitConstants;
-import com.libra.Config.Constants.ProfileConstants;
 import com.libra.Config.FileUploadUtil;
+import com.libra.Config.LibraConstants.ProfileConstants;
+import com.libra.Config.LibraConstants.ConfigConstants;
+import com.libra.Config.LibraConstants.InitConstants;
 import com.libra.Models.User;
-import com.libra.Service.*;
+import com.libra.Service.Interface.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +23,7 @@ public class ProfileController {
 
     @Autowired
     @Qualifier(ProfileConstants.CRUD_SERVICE_QUALIFIER)
-    private CRUDService <User> crudService;
+    private CrudService<User> crudService;
     @Autowired
     private UserService userService;
     @Autowired

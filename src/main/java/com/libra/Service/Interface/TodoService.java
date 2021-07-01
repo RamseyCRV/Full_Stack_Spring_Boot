@@ -1,4 +1,4 @@
-package com.libra.Service;
+package com.libra.Service.Interface;
 
 import com.libra.Models.Todo;
 import org.springframework.stereotype.Service;
@@ -11,4 +11,5 @@ public interface TodoService {
     int countAllTodosForActiveUser(final String username);
 
     List<Todo> deleteAllTodosByActiveUser(final String username);
+
 }
