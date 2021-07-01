@@ -1,17 +1,17 @@
-package com.libra.Service.Class;
+package com.libra.Dao.Impl;
 
+import com.libra.Dao.CrudDao;
+import com.libra.Dao.NotesDao;
 import com.libra.Models.Notes;
 import com.libra.Repository.NotesRepository;
-import com.libra.Service.Interface.CrudService;
-import com.libra.Service.Interface.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class NotesServiceImpl implements CrudService<Notes>, NotesService {
+@Component
+public class NotesDaoImpl implements CrudDao<Notes>, NotesDao {
 
     @Autowired
     private NotesRepository notesRepository;
@@ -27,7 +27,7 @@ public class NotesServiceImpl implements CrudService<Notes>, NotesService {
     }
 
     @Override
-    public void deleteObject(int id) {
+    public void deleteObjectById(int id) {
         notesRepository.deleteById(id);
     }
 
@@ -37,7 +37,7 @@ public class NotesServiceImpl implements CrudService<Notes>, NotesService {
     }
 
     @Override
-    public List<Notes> findObjectsForActiveUser(String username) {
+    public List<Notes> findNotesForActiveUser(String username) {
         return notesRepository.findByCreatedBy(username);
     }
 

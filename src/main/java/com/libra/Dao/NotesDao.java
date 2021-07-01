@@ -1,15 +1,14 @@
-package com.libra.Service.Interface;
+package com.libra.Dao;
 
 import com.libra.Models.Notes;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public interface NotesService {
+public interface NotesDao {
+
+    List<Notes> findNotesForActiveUser(final String username);
 
     int countAllNotesForActiveUser(final String username);
 
     List<Notes> deleteAllNotesByActiveUser(final String username);
-
 }
