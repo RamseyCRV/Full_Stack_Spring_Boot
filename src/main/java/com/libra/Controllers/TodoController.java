@@ -2,7 +2,8 @@ package com.libra.Controllers;
 
 import com.libra.Config.LibraConstants.TodoConstants;
 import com.libra.Models.Todo;
-import com.libra.Service.Interface.CrudService;
+import com.libra.Service.CrudService;
+import com.libra.Service.TodoService;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,14 +24,16 @@ public class TodoController {
 
     @Autowired
     @Qualifier(TodoConstants.CRUD_SERVICE_QUALIFIER)
-    CrudService<Todo> crudTodoService;
+    private CrudService<Todo> crudTodoService;
+    @Autowired
+    private TodoService todoService;
 
     /**
      * Load all todos on page for authenticated user
      */
     @GetMapping(TodoConstants.URL_PAGE)
     public String getTodos(Model model){
-        List<Todo> todos = crudTodoService.findObjectsForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Todo> todos = todoService.findAllTodosForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
         List<Todo> activeTodos= new ArrayList<Todo>();
         List<Todo> finishedTodos = new ArrayList<Todo>();
 

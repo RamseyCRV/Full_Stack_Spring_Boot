@@ -2,7 +2,8 @@ package com.libra.Controllers;
 
 import com.libra.Config.LibraConstants.NotesConstants;
 import com.libra.Models.Notes;
-import com.libra.Service.Interface.CrudService;
+import com.libra.Service.CrudService;
+import com.libra.Service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,14 +22,16 @@ public class NotesController {
 
     @Autowired
     @Qualifier(NotesConstants.CRUD_SERVICE_QUALIFIER)
-    CrudService<Notes> crudNotesService;
+    private CrudService<Notes> crudNotesService;
+    @Autowired
+    private NotesService notesService;
 
     /**
      * Get notes for active user
      */
     @GetMapping(NotesConstants.URL_PAGE)
     public String getNotes(Model model){
-        List<Notes> notes = crudNotesService.findObjectsForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<Notes> notes = notesService.findAllNotesForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute(NotesConstants.MODEL_NOTES, notes);
 
         return NotesConstants.HTML;

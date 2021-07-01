@@ -1,13 +1,11 @@
-package com.libra.Service.Interface;
+package com.libra.Dao;
 
 import com.libra.Models.DeleteAccounts;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
-public interface DeleteAccountsService {
+public interface DeleteAccountsDao {
 
     @Transactional
     void deleteAllAccounts();
@@ -15,4 +13,6 @@ public interface DeleteAccountsService {
     List<DeleteAccounts> getAccountsForDelete();
 
     void addAccountForDelete(final String username);
+
+    void deleteAccountById(final int id);
 }

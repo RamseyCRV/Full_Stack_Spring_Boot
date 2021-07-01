@@ -1,10 +1,10 @@
-package com.libra.Service.Class;
+package com.libra.Service.Impl;
 
 import com.libra.Dao.CrudDao;
-import com.libra.Models.Notes;
+import com.libra.Dao.TodoDao;
 import com.libra.Models.Todo;
-import com.libra.Service.Interface.CrudService;
-import com.libra.Service.Interface.TodoService;
+import com.libra.Service.CrudService;
+import com.libra.Service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TodoServiceImpl implements CrudService<Todo> {
+public class TodoServiceImpl implements CrudService<Todo>, TodoService {
 
     @Autowired
     private CrudDao<Todo> todoCrudDao;
+    @Autowired
+    private TodoDao todoDao;
 
     @Override
     public List<Todo> getObjects(){
@@ -38,17 +40,18 @@ public class TodoServiceImpl implements CrudService<Todo> {
     }
 
     @Override
-    public List<Todo> findObjectsForActiveUser(String username) {
-        return todoCrudDao.findObjectsForActiveUser(username);
+    public List<Todo> findAllTodosForActiveUser(String username) {
+        return todoDao.findTodosForActiveUser(username);
     }
 
     @Override
-    public int countAllObjectsForActiveUser(String username) {
-        return todoCrudDao.countAllObjectsForActiveUser(username);
+    public int countAllTodosForActiveUser(String username) {
+        return todoDao.countAllTodosForActiveUser(username);
     }
 
     @Override
-    public List<Todo> deleteAllObjectsByActiveUser(String username) {
-        return todoCrudDao.deleteAllObjectsByActiveUser(username);
+    public List<Todo> deleteAllTodosByActiveUser(String username) {
+        return todoDao.deleteAllTodosByActiveUser(username);
     }
+
 }
