@@ -20,7 +20,7 @@ public interface LibraConstants {
      */
     interface HomeConstants {
         String HTML = "home";
-        String URL_HOME = "/home";
+        String URL_HOME = "/";
         String NEWS_DEFULT = "everything";
         String NEWS_SORT = "recent";
     }
