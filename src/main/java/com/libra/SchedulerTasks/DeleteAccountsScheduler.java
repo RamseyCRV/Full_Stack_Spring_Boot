@@ -1,7 +1,7 @@
 package com.libra.SchedulerTasks;
 
 import com.libra.Config.LibraConstants;
-import com.libra.Service.DeleteAccountsService;
+import com.libra.Service.Interface.DeleteAccountsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

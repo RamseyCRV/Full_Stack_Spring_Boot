@@ -1,11 +1,11 @@
-package com.libra.Service.Impl;
+package com.libra.Service.Class;
 
 import com.libra.Models.User;
 import com.libra.Repository.UserRepository;
-import com.libra.Service.CRUDService;
-import com.libra.Service.NotesService;
-import com.libra.Service.TodoService;
-import com.libra.Service.UserService;
+import com.libra.Service.Interface.CrudService;
+import com.libra.Service.Interface.NotesService;
+import com.libra.Service.Interface.TodoService;
+import com.libra.Service.Interface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements CRUDService<User>, UserService {
+public class UserServiceImpl implements CrudService<User>, UserService {
 
     @Autowired
     private UserRepository userRepository;

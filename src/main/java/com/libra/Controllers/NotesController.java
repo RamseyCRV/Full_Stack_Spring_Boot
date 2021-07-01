@@ -2,7 +2,7 @@ package com.libra.Controllers;
 
 import com.libra.Config.LibraConstants.NotesConstants;
 import com.libra.Models.Notes;
-import com.libra.Service.CRUDService;
+import com.libra.Service.Interface.CrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,7 @@ public class NotesController {
 
     @Autowired
     @Qualifier(NotesConstants.CRUD_SERVICE_QUALIFIER)
-    CRUDService<Notes> crudNotesService;
+    CrudService<Notes> crudNotesService;
 
     /**
      * Get notes for active user

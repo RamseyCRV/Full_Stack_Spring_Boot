@@ -1,11 +1,11 @@
-package com.libra.Service.Impl;
+package com.libra.Service.Class;
 
 import com.libra.Config.FileUploadUtil;
 import com.libra.Config.LibraConstants;
 import com.libra.Models.DeleteAccounts;
 import com.libra.Repository.DeleteAccountsRepository;
-import com.libra.Service.DeleteAccountsService;
-import com.libra.Service.UserService;
+import com.libra.Service.Interface.DeleteAccountsService;
+import com.libra.Service.Interface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

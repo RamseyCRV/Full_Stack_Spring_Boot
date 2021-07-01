@@ -1,9 +1,9 @@
-package com.libra.Service.Impl;
+package com.libra.Service.Class;
 
 import com.libra.Models.Notes;
 import com.libra.Repository.NotesRepository;
-import com.libra.Service.CRUDService;
-import com.libra.Service.NotesService;
+import com.libra.Service.Interface.CrudService;
+import com.libra.Service.Interface.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NotesServiceImpl implements CRUDService<Notes>, NotesService {
+public class NotesServiceImpl implements CrudService<Notes>, NotesService {
 
     @Autowired
     private NotesRepository notesRepository;
