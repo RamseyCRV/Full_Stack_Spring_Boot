@@ -1,4 +1,5 @@
 # Spring Boot Application
+* News API
 * Todo app 
 * Notes App
 
