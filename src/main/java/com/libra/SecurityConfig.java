@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
                     {
-                        redirectStrategy.sendRedirect(request, response, LibraConstants.HomeConstants.URL_HOME);
+                        redirectStrategy.sendRedirect(request, response, LibraConstants.NewsConstants.URL_NEWS);
                     }
                 }).permitAll().and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)

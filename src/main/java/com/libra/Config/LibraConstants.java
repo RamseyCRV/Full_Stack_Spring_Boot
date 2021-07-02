@@ -18,11 +18,14 @@ public interface LibraConstants {
     /**
      * Constants for Home Controller
      */
-    interface HomeConstants {
+    interface NewsConstants {
         String HTML = "home";
-        String URL_HOME = "/";
+        String URL_NEWS = "/";
+        String URL_REDIRECT_NEWS = "redirect:/";
+        String URL_NEWS_SEARCH = "/news_search";
         String NEWS_DEFULT = "everything";
         String NEWS_SORT = "recent";
+        String NEWS_MODEL = "newsApi";
     }
 
     /**

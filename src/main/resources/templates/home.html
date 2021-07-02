@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/page.css">
+  <link rel="stylesheet" href="css/home.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   
@@ -31,7 +32,7 @@
         
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/}">Home</a></li>
+                <li class="active"><a th:href="@{/}">News</a></li>
                 <li><a th:href="@{/todos}">Todo's</a></li>
                 <li><a th:href="@{/notes}">Notes</a></li>
                 <li><a href="#">Coronavirus</a></li>
@@ -55,24 +56,53 @@
     </nav>
     
     <!-- Content -->
-    <div class="container-fluid">    
-        <div class="col-sm-12">
-
-            <table class="table text-center col-sm-12 card" th:each="news:${newsApi}" style="margin-top:50px">
-                <tbody class="col-sm-12 card-body" style="border:0">
-                    <tr class="col-sm-12" >
-                        <td class="col-sm-2"><img height="300px" width="300px" th:src="${news.urlToImage}"/></td>
-                        <td class="col-sm-2" >
-                            <a>Title</a>
-                            <span th:text="${news.title}"></span>
-                        </td>
-                        <td class="col-sm-2" >${news.description}</td>
-                        <td class="col-sm-2" th:text="${news.source.name}"></td>
-                        <td class="col-sm-2" th:text="${news.url}">-</td>
-                        <td class="col-sm-2" th:text="${news.publishedAt}">-</td>
+    <div class="container-fluid align-center">
+        <div class="col-sm-12 align-center" style="margin:10px">
+            <form class="example col-sm-6 col-xs-12 align-center text-center" th:action="@{/news_search}" method="get">
+                <table>
+                    <tr>
+                        <select name="sortBy">
+                            <option value="">Sort By</option>
+                            <option value="recent">Recent</option>
+                            <option value="popularity">Popularity</option>
+                        </select>
+                        <input type="text" placeholder="Search news.." name="searchNews">
+                        <button type="submit"><i class="fa fa-search align-center text-center"></i>Search</button>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+            </form>
+            <section class="wrapper" th:each="news:${newsApi}">
+                <div class="container-fostrap">
+
+                    <div class="content">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="card">
+                                        <a class="img-card">
+                                            <img th:src="${news.urlToImage}"/>
+                                        </a>
+                                        <div class="card-content">
+                                            <h4 class="card-title">
+                                                <strong><a th:text="${news.title}">title
+                                                </a></strong>
+                                            </h4>
+                                            <span>Author: <p th:text="${news.author}"></p></span>
+                                            <p class="" th:text="${news.description}"></p>
+                                            <span>Published at: <p th:text="${news.publishedAt}"></p></span>
+                                        </div>
+                                        <div class="card-read-more">
+                                            <a th:href="${news.url}" class="btn btn-link btn-block">Read More</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
