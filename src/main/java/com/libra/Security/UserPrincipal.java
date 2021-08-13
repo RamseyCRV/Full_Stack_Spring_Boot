@@ -1,12 +1,13 @@
 package com.libra.Security;
 
 import com.libra.Models.User;
+import com.libra.Models.UserRoles;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import javax.management.relation.Role;
+import java.util.*;
 
 public class UserPrincipal implements UserDetails {
 
@@ -18,7 +19,13 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        Set<UserRoles> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for(UserRoles userRoles : roles){
+            authorities.add(new SimpleGrantedAuthority(userRoles.getRoles()));
+        }
+        return authorities;
     }
 
     @Override
