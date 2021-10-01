@@ -1,4 +1,4 @@
-package com.libra.Models.NewsAPI;
+package com.libra.Models.CoronavirusAPI;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties
-class SourceModel {
+class LatestDataModel {
 
-    private String id;
-    private String name;
+    private int deaths;
+    private int confirmed;
+    private int recovered;
+    private int critical;
+
 }
