@@ -100,4 +100,9 @@ public interface LibraConstants {
         String REDIRECT_TO_TODOS = "redirect:/todos";
         String CRUD_SERVICE_QUALIFIER = "todoServiceImpl";
     }
+
+    interface CoronavirusConstants{
+        String URL_PAGE = "/coronavirus";
+        String HTML = "coronavirus";
+    }
 }
