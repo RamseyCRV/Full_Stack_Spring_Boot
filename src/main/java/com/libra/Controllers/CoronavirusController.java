@@ -1,15 +1,18 @@
 package com.libra.Controllers;
 
-import com.libra.Config.LibraConstants.CoronavirusConstants;
+import com.libra.Config.LibraConstants.Controllers.Coronavirus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping(value = Coronavirus.URL_PAGE)
 public class CoronavirusController{
 
-    @GetMapping(CoronavirusConstants.URL_PAGE)
-    public String getRequest(){
+    @GetMapping
+    public ModelAndView getRequest(){
 
-        return CoronavirusConstants.HTML;
+        return new ModelAndView(Coronavirus.VIEW);
     }
 }

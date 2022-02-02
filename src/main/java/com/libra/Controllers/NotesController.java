@@ -1,7 +1,7 @@
 package com.libra.Controllers;
 
-import com.libra.Config.LibraConstants.NotesConstants;
-import com.libra.Models.Notes;
+import com.libra.Config.LibraConstants;
+import com.libra.Config.LibraConstants.Controllers.Notes;
 import com.libra.Service.CrudService;
 import com.libra.Service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,62 +19,66 @@ import java.util.Optional;
  * Notes page controller
  */
 @Controller
+@RequestMapping(value = Notes.URL_PAGE)
 public class NotesController {
 
     @Autowired
-    @Qualifier(NotesConstants.CRUD_SERVICE_QUALIFIER)
-    private CrudService<Notes> crudNotesService;
+    @Qualifier(Notes.CRUD_SERVICE_QUALIFIER)
+    private CrudService<com.libra.Models.Notes> crudNotesService;
     @Autowired
     private NotesService notesService;
 
     /**
      * Get notes for active user
      */
-    @GetMapping(NotesConstants.URL_PAGE)
-    public String getNotes(Model model){
-        List<Notes> notes = notesService.findAllNotesForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        model.addAttribute(NotesConstants.MODEL_NOTES, notes);
+    @GetMapping
+    public ModelAndView getNotes(Model model){
 
-        return NotesConstants.HTML;
+        List<com.libra.Models.Notes> notes = notesService.findAllNotesForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        model.addAttribute(Notes.MODEL_NOTES, notes);
+        model.addAttribute("titlu", "sa vedem");
+
+        return new ModelAndView(Notes.VIEW);
     }
 
     /**
      * Add note in DB
      */
-    @PostMapping(NotesConstants.URL_SAVE)
-    public String addNote(Notes note){
+    @PostMapping(Notes.URL_ADD)
+    public String addNote(com.libra.Models.Notes note){
         crudNotesService.saveObject(note);
 
-        return NotesConstants.REDIRECT_TO_NOTES;
+        return Notes.URL_REDIRECT;
     }
 
     /**
      * Delete note using id
      */
-    @RequestMapping(value = NotesConstants.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value = Notes.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteNote(int id){
         crudNotesService.deleteObject(id);
 
-        return NotesConstants.REDIRECT_TO_NOTES;
+        return Notes.URL_REDIRECT;
     }
 
     /**
      * Find a note using id
      */
-    @RequestMapping(NotesConstants.URL_FIND_BY_ID)
+    @RequestMapping(Notes.URL_FIND_BY_ID)
     @ResponseBody
-    public Optional<Notes> findNoteById(int id){
+    public Optional<com.libra.Models.Notes> findNoteById(int id){
         return crudNotesService.findObjectById(id);
     }
 
     /**
      * Update a note
      */
-    @RequestMapping(value = NotesConstants.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
-    public String updateNote(Notes note){
+    @RequestMapping(value = Notes.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
+    public String updateNote(com.libra.Models.Notes note){
         crudNotesService.saveObject(note);
 
-        return NotesConstants.REDIRECT_TO_NOTES;
+        return Notes.URL_REDIRECT;
     }
 
 }

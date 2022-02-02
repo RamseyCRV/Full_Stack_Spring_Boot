@@ -1,6 +1,7 @@
 package com.libra;
 
 import com.libra.Security.SpringSecurityAuditorAware;
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.MeterRegistry;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableJpaAuditing
 @EnableScheduling
+//@EnableAdminServer
 @SpringBootApplication
 public class LibraWebSiteApplication {
 

@@ -47,30 +47,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/errorSignUp",
                         "/resources/**","/avatar/**","/css/**",
                         "/icons/**","/images/**", "/Products/**",  "/js/**")
                 .permitAll()
                 .antMatchers(
-                        "/signIn", "/signUp" ,"/resources/**"
+                        "/signIn", "/signUp" , "/", "/resources/**"
                         ,"/avatar/**","/css/**","/icons/**","/images/**",
                         "/Products/**",  "/js/**"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin()
-                .loginPage(LibraConstants.InitConstants.URL_SIGN_IN)
+                .loginPage(LibraConstants.Controllers.Init.URL_SIGN_IN)
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
                     {
-                        redirectStrategy.sendRedirect(request, response, LibraConstants.NewsConstants.URL_NEWS);
+                        redirectStrategy.sendRedirect(request, response, LibraConstants.Controllers.News.URL_PAGE);
                     }
                 }).permitAll().and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher(LibraConstants.InitConstants.URL_SIGN_OUT))
-                .logoutSuccessUrl(LibraConstants.InitConstants.URL_SIGN_IN).permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher(LibraConstants.Controllers.Init.URL_SIGN_OUT))
+                .logoutSuccessUrl(LibraConstants.Controllers.Init.URL_SIGN_IN).permitAll()
                 .and().logout();
     }
 

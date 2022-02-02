@@ -1,7 +1,6 @@
 package com.libra.Controllers;
 
-import com.libra.Config.LibraConstants.TodoConstants;
-import com.libra.Models.Todo;
+import com.libra.Config.LibraConstants.Controllers.Todo;
 import com.libra.Service.CrudService;
 import com.libra.Service.TodoService;
 import org.apache.commons.lang3.BooleanUtils;
@@ -20,25 +19,26 @@ import java.util.Optional;
  * Controller for "Todos" page
  */
 @Controller
+@RequestMapping(value = Todo.URL_PAGE)
 public class TodoController {
 
     @Autowired
-    @Qualifier(TodoConstants.CRUD_SERVICE_QUALIFIER)
-    private CrudService<Todo> crudTodoService;
+    @Qualifier(Todo.CRUD_SERVICE_QUALIFIER)
+    private CrudService<com.libra.Models.Todo> crudTodoService;
     @Autowired
     private TodoService todoService;
 
     /**
      * Load all todos on page for authenticated user
      */
-    @GetMapping(TodoConstants.URL_PAGE)
+    @GetMapping
     public String getTodos(Model model){
-        List<Todo> todos = todoService.findAllTodosForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
-        List<Todo> activeTodos= new ArrayList<Todo>();
-        List<Todo> finishedTodos = new ArrayList<Todo>();
+        List<com.libra.Models.Todo> todos = todoService.findAllTodosForActiveUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<com.libra.Models.Todo> activeTodos= new ArrayList<com.libra.Models.Todo>();
+        List<com.libra.Models.Todo> finishedTodos = new ArrayList<com.libra.Models.Todo>();
 
         if (todos != null){
-            for(Todo todo : todos){
+            for(com.libra.Models.Todo todo : todos){
                 if(BooleanUtils.isTrue(todo.getIsDone())){
                     finishedTodos.add(todo);
                 }else{
@@ -47,60 +47,60 @@ public class TodoController {
             }
         }
 
-        model.addAttribute(TodoConstants.MODEL_ACTIVE_TODOS, activeTodos);
-        model.addAttribute(TodoConstants.MODEL_FINISHED_TODOS, finishedTodos);
+        model.addAttribute(Todo.MODEL_ACTIVE_TODOS, activeTodos);
+        model.addAttribute(Todo.MODEL_FINISHED_TODOS, finishedTodos);
 
-        return TodoConstants.HTML;
+        return Todo.VIEW;
     }
 
     /**
      * Add todo to DB
      */
-    @PostMapping(TodoConstants.URL_SAVE)
-    public String addTodo(Todo todo){
+    @PostMapping(Todo.URL_SAVE)
+    public String addTodo(com.libra.Models.Todo todo){
         crudTodoService.saveObject(todo);
 
-        return TodoConstants.REDIRECT_TO_TODOS;
+        return Todo.REDIRECT_TO_TODOS;
     }
 
     /**
      * Delete todo
      */
-    @RequestMapping(value = TodoConstants.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
+    @RequestMapping(value = Todo.URL_DELETE, method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteTodo(int id){
         crudTodoService.deleteObject(id);
 
-        return TodoConstants.REDIRECT_TO_TODOS;
+        return Todo.REDIRECT_TO_TODOS;
     }
 
     /**
      * Find todo by id
      */
-    @RequestMapping(TodoConstants.URL_FIND_BY_ID)
+    @RequestMapping(Todo.URL_FIND_BY_ID)
     @ResponseBody
-    public Optional<Todo> findTodoById(int id){
+    public Optional<com.libra.Models.Todo> findTodoById(int id){
         return crudTodoService.findObjectById(id);
     }
 
     /**
      * Update todo
      */
-    @RequestMapping(value = TodoConstants.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
-    public String updateTodo(Todo todo){
+    @RequestMapping(value = Todo.URL_UPDATE, method = {RequestMethod.PUT, RequestMethod.GET})
+    public String updateTodo(com.libra.Models.Todo todo){
         crudTodoService.saveObject(todo);
 
-        return TodoConstants.REDIRECT_TO_TODOS;
+        return Todo.REDIRECT_TO_TODOS;
     }
 
     /**
      * If user press "Done" & "Restore" than update the value
      */
-    @RequestMapping(value = TodoConstants.URL_IS_DONE, method = {RequestMethod.PUT, RequestMethod.GET})
+    @RequestMapping(value = Todo.URL_IS_DONE, method = {RequestMethod.PUT, RequestMethod.GET})
     public String isDone(int id){
-        Optional<Todo> todoOptional = crudTodoService.findObjectById(id);
+        Optional<com.libra.Models.Todo> todoOptional = crudTodoService.findObjectById(id);
 
         if(todoOptional != null) {
-            Todo todos = todoOptional.get();
+            com.libra.Models.Todo todos = todoOptional.get();
             if(BooleanUtils.isTrue(todos.getIsDone())) {
                 todos.setIsDone(Boolean.FALSE);
             }else{
@@ -109,6 +109,6 @@ public class TodoController {
             crudTodoService.saveObject(todos);
         }
 
-        return TodoConstants.REDIRECT_TO_TODOS;
+        return Todo.REDIRECT_TO_TODOS;
     }
 }
