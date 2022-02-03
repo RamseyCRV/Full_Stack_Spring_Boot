@@ -1,14 +1,12 @@
 package com.libra.Repository;
 
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<UserModel, Integer> {
 
-    User findUserByUsername(String username);
+    UserModel findUserByUsername(String username);
 
 }

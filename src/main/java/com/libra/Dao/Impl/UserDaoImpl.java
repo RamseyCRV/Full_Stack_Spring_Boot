@@ -2,7 +2,7 @@ package com.libra.Dao.Impl;
 
 import com.libra.Dao.CrudDao;
 import com.libra.Dao.UserDao;
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import com.libra.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserDaoImpl implements CrudDao<User>, UserDao {
+public class UserDaoImpl implements CrudDao<UserModel>, UserDao {
 
     @Autowired
     private UserRepository userRepository;
 
     @Override
-    public List<User> getObjects() {
+    public List<UserModel> getObjects() {
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<User> findObjectById(int id) {
+    public Optional<UserModel> findObjectById(int id) {
         return userRepository.findById(id);
     }
 
@@ -32,12 +32,12 @@ public class UserDaoImpl implements CrudDao<User>, UserDao {
     }
 
     @Override
-    public void saveObject(User object) {
+    public void saveObject(UserModel object) {
         userRepository.save(object);
     }
 
     @Override
-    public User findUserByUsername(String username) {
+    public UserModel findUserByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
 

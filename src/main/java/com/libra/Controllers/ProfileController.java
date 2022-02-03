@@ -4,7 +4,7 @@ import com.libra.Config.FileUploadUtil;
 import com.libra.Config.LibraConstants.Controllers.Profile;
 import com.libra.Config.LibraConstants.ConfigConstants;
 import com.libra.Config.LibraConstants.Controllers.Init;
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import com.libra.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +24,7 @@ public class ProfileController {
 
     @Autowired
     @Qualifier(Profile.CRUD_SERVICE_QUALIFIER)
-    private CrudService<User> crudService;
+    private CrudService<UserModel> crudService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -41,11 +41,11 @@ public class ProfileController {
     public String getProfile(Model model){
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        final User activeUser = userService.returnCurrentSignInUser(username);
+        final UserModel activeUserModel = userService.returnCurrentSignInUser(username);
         int userNotes = notesService.countAllNotesForActiveUser(username);
         int userTodos = todoService.countAllTodosForActiveUser(username);
 
-        model.addAttribute(Profile.MODEL_USER, activeUser);
+        model.addAttribute(Profile.MODEL_USER, activeUserModel);
         model.addAttribute(Profile.MODEL_COUNT_NOTES, userNotes);
         model.addAttribute(Profile.MODEL_COUNT_TODOS, userTodos);
 
@@ -63,21 +63,21 @@ public class ProfileController {
                            @RequestParam(Profile.PARAM_EMAIL) String email)
             throws IOException {
 
-        User user = userService.returnCurrentSignInUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserModel userModel = userService.returnCurrentSignInUser(SecurityContextHolder.getContext().getAuthentication().getName());
 
         if (multipartFile.getSize() > 0) {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             String avatar = username + ConfigConstants.PNG_EXTENSION;
-            user.setAvatar(avatar);
+            userModel.setAvatar(avatar);
             FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
         }
 
-        user.setPhone(phone);
-        user.setEmail(email);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
+        userModel.setPhone(phone);
+        userModel.setEmail(email);
+        userModel.setFirstName(firstName);
+        userModel.setLastName(lastName);
 
-        userService.updateUserProfile(user);
+        userService.updateUserProfile(userModel);
 
         return Profile.URL_REDIRECT_TO_PAGE;
     }

@@ -1,12 +1,12 @@
 package com.libra.Service;
 
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 
 public interface UserService {
 
-    User returnCurrentSignInUser(final String username);
+    UserModel returnCurrentSignInUser(final String username);
 
-    void updateUserProfile(final User user);
+    void updateUserProfile(final UserModel userModel);
 
     boolean changePassword(final String username, final String oldPassword, final String newPassword);
 

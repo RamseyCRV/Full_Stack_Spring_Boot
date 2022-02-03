@@ -2,7 +2,7 @@ package com.libra.Service.Impl;
 
 import com.libra.Dao.CrudDao;
 import com.libra.Dao.UserDao;
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import com.libra.Service.CrudService;
 import com.libra.Service.NotesService;
 import com.libra.Service.TodoService;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements CrudService<User>, UserService {
+public class UserServiceImpl implements CrudService<UserModel>, UserService {
 
     @Autowired
-    private CrudDao<User> userCrudDao;
+    private CrudDao<UserModel> userCrudDao;
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -29,12 +29,12 @@ public class UserServiceImpl implements CrudService<User>, UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public List<User> getObjects() {
+    public List<UserModel> getObjects() {
         return userCrudDao.getObjects();
     }
 
     @Override
-    public Optional<User> findObjectById(int id) {
+    public Optional<UserModel> findObjectById(int id) {
         return userCrudDao.findObjectById(id);
     }
 
@@ -44,28 +44,28 @@ public class UserServiceImpl implements CrudService<User>, UserService {
     }
 
     @Override
-    public void saveObject(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userCrudDao.saveObject(user);
+    public void saveObject(UserModel userModel) {
+        userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
+        userCrudDao.saveObject(userModel);
     }
 
     @Override
-    public User returnCurrentSignInUser(String username) {
+    public UserModel returnCurrentSignInUser(String username) {
         return userDao.findUserByUsername(username);
     }
 
     @Override
-    public void updateUserProfile(User user) {
-        userCrudDao.saveObject(user);
+    public void updateUserProfile(UserModel userModel) {
+        userCrudDao.saveObject(userModel);
     }
 
     @Override
     public boolean changePassword(String username, String oldPassword, String newPassword) {
-        User user = userDao.findUserByUsername(username);
+        UserModel userModel = userDao.findUserByUsername(username);
 
-        if (bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
-            user.setPassword(newPassword);
-            saveObject(user);
+        if (bCryptPasswordEncoder.matches(oldPassword, userModel.getPassword())) {
+            userModel.setPassword(newPassword);
+            saveObject(userModel);
             return true;
         } else {
             return false;
@@ -74,17 +74,17 @@ public class UserServiceImpl implements CrudService<User>, UserService {
 
     @Override
     public void deleteAccount(String username) {
-        User user = userDao.findUserByUsername(username);
+        UserModel userModel = userDao.findUserByUsername(username);
         notesService.deleteAllNotesByActiveUser(username);
         todoService.deleteAllTodosByActiveUser(username);
-        deleteObject(user.getId());
+        deleteObject(userModel.getId());
     }
 
     @Override
     public boolean passwordIsCorrect(String username, String password) {
-        User user = userDao.findUserByUsername(username);
+        UserModel userModel = userDao.findUserByUsername(username);
 
-        if (bCryptPasswordEncoder.matches(password, user.getPassword())) {
+        if (bCryptPasswordEncoder.matches(password, userModel.getPassword())) {
             return true;
         } else {
             return false;

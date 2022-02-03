@@ -63,7 +63,7 @@ public interface LibraConstants {
          */
         interface News {
             String VIEW = "home";
-            String URL_PAGE = "/news";
+            String URL_PAGE = "/";
             String URL_REDIRECT = "redirect:/";
             String URL_SEARCH = "/news_search";
             String NEWS_DEFULT = "everything";
@@ -104,6 +104,16 @@ public interface LibraConstants {
             String VIEW = "coronavirus";
         }
 
+    }
+
+    interface Views{
+        String MENU_NOTES = "menu.name.notes";
+        String MENU_TODO = "menu.name.todo";
+        String MENU_NEWS = "menu.name.news";
+        String MENU_COVID = "menu.name.coronavirus";
+        String MENU_STOCKS = "menu.name.stocks";
+        String MODEL_PAGE_TITLE = "pageTitle";
+        String TITLE_PREFIX = "Libra | ";
     }
 
     /**

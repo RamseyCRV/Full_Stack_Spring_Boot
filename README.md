@@ -18,7 +18,7 @@
 ![](src/main/resources/static/images/screnshoots/news1.png)
 ![](src/main/resources/static/images/screnshoots/news2.png)
 # Todo Page
-![](src/main/resources/static/images/screnshoots/todo.png)
+![](src/main/resources/static/images/screnshoots/todoModel.png)
 # Notes Page
 ![](src/main/resources/static/images/screnshoots/notes.png)
 ![](src/main/resources/static/images/screnshoots/notes1.png)

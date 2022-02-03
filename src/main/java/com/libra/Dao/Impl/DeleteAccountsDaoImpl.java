@@ -1,7 +1,7 @@
 package com.libra.Dao.Impl;
 
 import com.libra.Dao.DeleteAccountsDao;
-import com.libra.Models.DeleteAccounts;
+import com.libra.Models.DeleteAccountsModel;
 import com.libra.Repository.DeleteAccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,13 +20,13 @@ public class DeleteAccountsDaoImpl implements DeleteAccountsDao {
     }
 
     @Override
-    public List<DeleteAccounts> getAccountsForDelete() {
+    public List<DeleteAccountsModel> getAccountsForDelete() {
         return deleteAccountsRepository.findAll();
     }
 
     @Override
     public void addAccountForDelete(String username) {
-        DeleteAccounts deleteAccount = new DeleteAccounts();
+        DeleteAccountsModel deleteAccount = new DeleteAccountsModel();
         deleteAccount.setUsername(username);
         deleteAccountsRepository.save(deleteAccount);
     }

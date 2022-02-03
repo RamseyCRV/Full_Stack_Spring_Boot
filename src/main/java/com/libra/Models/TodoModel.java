@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Todo extends Auditable<String>{
+public class TodoModel extends Auditable<String>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

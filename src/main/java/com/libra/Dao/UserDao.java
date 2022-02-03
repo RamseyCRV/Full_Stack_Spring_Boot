@@ -1,8 +1,8 @@
 package com.libra.Dao;
 
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 
 public interface UserDao {
 
-    User findUserByUsername(final String username);
+    UserModel findUserByUsername(final String username);
 }

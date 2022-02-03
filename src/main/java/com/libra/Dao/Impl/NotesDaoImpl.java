@@ -2,7 +2,7 @@ package com.libra.Dao.Impl;
 
 import com.libra.Dao.CrudDao;
 import com.libra.Dao.NotesDao;
-import com.libra.Models.Notes;
+import com.libra.Models.NotesModel;
 import com.libra.Repository.NotesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class NotesDaoImpl implements CrudDao<Notes>, NotesDao {
+public class NotesDaoImpl implements CrudDao<NotesModel>, NotesDao {
 
     @Autowired
     private NotesRepository notesRepository;
 
     @Override
-    public List<Notes> getObjects() {
+    public List<NotesModel> getObjects() {
         return notesRepository.findAll();
     }
 
     @Override
-    public Optional<Notes> findObjectById(int id) {
+    public Optional<NotesModel> findObjectById(int id) {
         return notesRepository.findById(id);
     }
 
@@ -32,12 +32,12 @@ public class NotesDaoImpl implements CrudDao<Notes>, NotesDao {
     }
 
     @Override
-    public void saveObject(Notes object) {
+    public void saveObject(NotesModel object) {
         notesRepository.save(object);
     }
 
     @Override
-    public List<Notes> findNotesForActiveUser(String username) {
+    public List<NotesModel> findNotesForActiveUser(String username) {
         return notesRepository.findByCreatedBy(username);
     }
 
@@ -47,7 +47,7 @@ public class NotesDaoImpl implements CrudDao<Notes>, NotesDao {
     }
 
     @Override
-    public List<Notes> deleteAllNotesByActiveUser(String username) {
+    public List<NotesModel> deleteAllNotesByActiveUser(String username) {
         return notesRepository.deleteByCreatedBy(username);
     }
 }

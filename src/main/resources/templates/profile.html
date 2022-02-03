@@ -47,7 +47,7 @@
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-userModel"></span> Profile</a></li>
                         <li><a th:href="@{/signOut}" class="text-center"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>
@@ -88,7 +88,7 @@
                                             <h6 class="mb-0">First Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <p th:text="${activeUser.firstName}">-</p>
+                                            <p th:text="${activeUserModel.firstName}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -97,7 +97,7 @@
                                             <h6 class="mb-0">Last Name</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <p th:text="${activeUser.lastName}">-</p>
+                                            <p th:text="${activeUserModel.lastName}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -106,7 +106,7 @@
                                             <h6 class="mb-0">Email</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <p th:text="${activeUser.email}">-</p>
+                                            <p th:text="${activeUserModel.email}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -115,7 +115,7 @@
                                             <h6 class="mb-0">Phone</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <p th:text="${activeUser.phone}">-</p>
+                                            <p th:text="${activeUserModel.phone}">-</p>
                                         </div>
                                     </div>
                                     <hr>
@@ -142,7 +142,7 @@
                                             <h6 class="mb-0">Settings</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <a th:href="@{/profile/findById/(id=${activeUser.id})}" class="btn col-sm-4" id="editUserProfileBtn">Edit Profile</a>
+                                            <a th:href="@{/profile/findById/(id=${activeUserModel.id})}" class="btn col-sm-4" id="editUserProfileBtn">Edit Profile</a>
                                             <a class="btn col-sm-4" data-toggle="modal" data-target="#editProfilePasswordModal">Change Password</a>
                                             <a class="btn col-sm-4" data-toggle="modal" data-target="#deleteProfileModal">Delete Account</a>
                                         </div>
@@ -165,7 +165,7 @@
                     <label class="col-form-label">Edit Profile</label>
                 </div>
                 <div class="modal-body">
-                    <form th:action="@{/profile/updateProfile}" method="post" enctype="multipart/form-data" th:object="${user}">
+                    <form th:action="@{/profile/updateProfile}" method="post" enctype="multipart/form-data" th:object="${userModel}">
                         <div class="form-group">
                             <input class="form-control" id="idUserProfile" name="id" type="hidden">
                             <label>Avatar</label>

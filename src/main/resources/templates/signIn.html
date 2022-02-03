@@ -21,7 +21,7 @@
     <h4>To continue please Sign In</h4>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form th:action="@{/signUp}" method="post" enctype="multipart/form-data" th:object="${user}" id="createAccountForm">
+            <form th:action="@{/signUp}" method="post" enctype="multipart/form-data" th:object="${userModel}" id="createAccountForm">
                 <h1>Create Account</h1>
                 <input type="file" placeholder="Profile Photo" name="avatar" accept="image/png, image/jpeg">
                 <input type="text" placeholder="First Name" name="firstName" />

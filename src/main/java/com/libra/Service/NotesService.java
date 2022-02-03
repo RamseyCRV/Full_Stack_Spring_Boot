@@ -1,15 +1,15 @@
 package com.libra.Service;
 
-import com.libra.Models.Notes;
+import com.libra.Models.NotesModel;
 
 import java.util.List;
 
 public interface NotesService {
 
-    List<Notes> findAllNotesForActiveUser(final String username);
+    List<NotesModel> findAllNotesForActiveUser(final String username);
 
     int countAllNotesForActiveUser(final String username);
 
-    List<Notes> deleteAllNotesByActiveUser(final String username);
+    List<NotesModel> deleteAllNotesByActiveUser(final String username);
 
 }

@@ -1,14 +1,14 @@
 package com.libra.Dao;
 
-import com.libra.Models.Notes;
+import com.libra.Models.NotesModel;
 
 import java.util.List;
 
 public interface NotesDao {
 
-    List<Notes> findNotesForActiveUser(final String username);
+    List<NotesModel> findNotesForActiveUser(final String username);
 
     int countAllNotesForActiveUser(final String username);
 
-    List<Notes> deleteAllNotesByActiveUser(final String username);
+    List<NotesModel> deleteAllNotesByActiveUser(final String username);
 }

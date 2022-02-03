@@ -3,7 +3,7 @@ package com.libra.Service.Impl;
 import com.libra.Config.FileUploadUtil;
 import com.libra.Config.LibraConstants;
 import com.libra.Dao.DeleteAccountsDao;
-import com.libra.Models.DeleteAccounts;
+import com.libra.Models.DeleteAccountsModel;
 import com.libra.Service.DeleteAccountsService;
 import com.libra.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +24,19 @@ public class DeleteAccountsServiceImpl implements DeleteAccountsService {
     @Transactional
     @Override
     public void deleteAllAccounts() {
-        List<DeleteAccounts> accountsForDelete = getAccountsForDelete();
+        List<DeleteAccountsModel> accountsForDelete = getAccountsForDelete();
 
         if(!accountsForDelete.isEmpty()) {
-            for (DeleteAccounts deleteAccounts : accountsForDelete) {
-                userService.deleteAccount(deleteAccounts.getUsername());
-                FileUploadUtil.deleteImage(deleteAccounts.getUsername() + LibraConstants.ConfigConstants.PNG_EXTENSION);
-                deleteAccountsDao.deleteAccountById(deleteAccounts.getId());
+            for (DeleteAccountsModel deleteAccountsModel : accountsForDelete) {
+                userService.deleteAccount(deleteAccountsModel.getUsername());
+                FileUploadUtil.deleteImage(deleteAccountsModel.getUsername() + LibraConstants.ConfigConstants.PNG_EXTENSION);
+                deleteAccountsDao.deleteAccountById(deleteAccountsModel.getId());
             }
         }
     }
 
     @Override
-    public List<DeleteAccounts> getAccountsForDelete() {
+    public List<DeleteAccountsModel> getAccountsForDelete() {
         return deleteAccountsDao.getAccountsForDelete();
     }
 

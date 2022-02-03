@@ -10,12 +10,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Notes extends Auditable<String>{
+@Table(name = "roles")
+public class UserRolesModel {
 
     @Id
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int notesId;
-    private String text;
-    private String title;
-
+    private int id;
+    private String roles;
 }

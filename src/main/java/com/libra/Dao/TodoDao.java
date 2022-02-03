@@ -1,6 +1,6 @@
 package com.libra.Dao;
 
-import com.libra.Models.Todo;
+import com.libra.Models.TodoModel;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ public interface TodoDao {
 
     int countAllTodosForActiveUser(String username);
 
-    List<Todo> deleteAllTodosByActiveUser(String username);
+    List<TodoModel> deleteAllTodosByActiveUser(String username);
 
-    List<Todo> findTodosForActiveUser(final String username);
+    List<TodoModel> findTodosForActiveUser(final String username);
 
 }

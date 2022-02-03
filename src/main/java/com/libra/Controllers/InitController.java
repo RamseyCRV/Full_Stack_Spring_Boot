@@ -4,7 +4,7 @@ import com.libra.Config.FileUploadUtil;
 import com.libra.Config.LibraConstants.Controllers.Init;
 import com.libra.Config.LibraConstants.Controllers.Profile;
 import com.libra.Config.LibraConstants.ConfigConstants;
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import com.libra.Service.CrudService;
 import com.libra.Service.UserService;
 import org.apache.commons.lang3.BooleanUtils;
@@ -21,19 +21,18 @@ import java.io.IOException;
  * SignIn & SignUp Controller
  */
 @Controller
-@RequestMapping(value = Init.URL_SIGN_IN)
 public class InitController {
 
     @Autowired
     @Qualifier(Init.CRUD_SERVICE_QUALIFIER)
-    private CrudService<User> crudService;
+    private CrudService<UserModel> crudService;
     @Autowired
     private UserService userService;
 
     /**
      * SignIn & SignUP Page
      */
-    @GetMapping
+    @GetMapping(value = Init.URL_SIGN_IN)
     public String getSignInPage() {
 
         return Init.VIEW;
@@ -53,7 +52,7 @@ public class InitController {
                            @RequestParam(Profile.PARAM_PASSWORD) String password,
                            Model model)
             throws IOException {
-        User user = new User();
+        UserModel userModel = new UserModel();
 
         if (BooleanUtils.isTrue(userService.checkIfUsernameExist(username))) {
             return Init.REDIRECT_TO_SIGN_UP_ERROR;
@@ -61,17 +60,17 @@ public class InitController {
         } else {
             if (multipartFile.getSize() > 0) {
                 String avatar = username + ConfigConstants.PNG_EXTENSION;
-                user.setAvatar(avatar);
+                userModel.setAvatar(avatar);
                 FileUploadUtil.saveFile(ConfigConstants.AVATAR_USER_PATH, avatar, multipartFile);
             }
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setUsername(username);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setPhone(phone);
+            userModel.setEmail(email);
+            userModel.setPassword(password);
+            userModel.setUsername(username);
+            userModel.setFirstName(firstName);
+            userModel.setLastName(lastName);
+            userModel.setPhone(phone);
 
-            crudService.saveObject(user);
+            crudService.saveObject(userModel);
 
             return Init.REDIRECT_TO_SIGN_IN;
         }

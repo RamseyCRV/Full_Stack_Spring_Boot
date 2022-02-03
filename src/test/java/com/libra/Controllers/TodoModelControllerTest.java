@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Created by robert on 01.10.2021
  */
 @SpringBootTest
-class TodoControllerTest {
+class TodoModelControllerTest {
 
     @Test
     void getTodos() {

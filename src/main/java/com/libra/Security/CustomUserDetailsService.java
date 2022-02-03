@@ -1,6 +1,6 @@
 package com.libra.Security;
 
-import com.libra.Models.User;
+import com.libra.Models.UserModel;
 import com.libra.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +17,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByUsername(username);
+        UserModel userModel = userRepository.findUserByUsername(username);
 
-        if (user == null){
+        if (userModel == null){
             throw new UsernameNotFoundException("User not found");
         }
-        return new UserPrincipal(user);
+        return new UserPrincipal(userModel);
     }
 
 }

@@ -1,15 +1,15 @@
 package com.libra.Service;
 
-import com.libra.Models.Todo;
+import com.libra.Models.TodoModel;
 
 import java.util.List;
 
 public interface TodoService {
 
-    List<Todo> findAllTodosForActiveUser(final String username);
+    List<TodoModel> findAllTodosForActiveUser(final String username);
 
     int countAllTodosForActiveUser(final String username);
 
-    List<Todo> deleteAllTodosByActiveUser(final String username);
+    List<TodoModel> deleteAllTodosByActiveUser(final String username);
 
 }

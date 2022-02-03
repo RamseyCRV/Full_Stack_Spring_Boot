@@ -2,7 +2,7 @@ package com.libra.Service.Impl;
 
 import com.libra.Dao.CrudDao;
 import com.libra.Dao.NotesDao;
-import com.libra.Models.Notes;
+import com.libra.Models.NotesModel;
 import com.libra.Service.CrudService;
 import com.libra.Service.NotesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,20 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class NotesServiceImpl implements CrudService<Notes>, NotesService {
+public class NotesServiceImpl implements CrudService<NotesModel>, NotesService {
 
     @Autowired
-    private CrudDao<Notes> notesCrudDao;
+    private CrudDao<NotesModel> notesCrudDao;
     @Autowired
     private NotesDao notesDao;
 
     @Override
-    public List<Notes> getObjects() {
+    public List<NotesModel> getObjects() {
         return notesCrudDao.getObjects();
     }
 
     @Override
-    public Optional<Notes> findObjectById(int id) {
+    public Optional<NotesModel> findObjectById(int id) {
         return notesCrudDao.findObjectById(id);
     }
 
@@ -35,12 +35,12 @@ public class NotesServiceImpl implements CrudService<Notes>, NotesService {
     }
 
     @Override
-    public void saveObject(Notes object) {
+    public void saveObject(NotesModel object) {
         notesCrudDao.saveObject(object);
     }
 
     @Override
-    public List<Notes> findAllNotesForActiveUser(String username) {
+    public List<NotesModel> findAllNotesForActiveUser(String username) {
         return notesDao.findNotesForActiveUser(username);
     }
 
@@ -50,7 +50,7 @@ public class NotesServiceImpl implements CrudService<Notes>, NotesService {
     }
 
     @Override
-    public List<Notes> deleteAllNotesByActiveUser(String username) {
+    public List<NotesModel> deleteAllNotesByActiveUser(String username) {
         return notesDao.deleteAllNotesByActiveUser(username);
     }
 

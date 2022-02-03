@@ -1,41 +1,40 @@
 package com.libra.Security;
 
-import com.libra.Models.User;
-import com.libra.Models.UserRoles;
+import com.libra.Models.UserModel;
+import com.libra.Models.UserRolesModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
 import java.util.*;
 
 public class UserPrincipal implements UserDetails {
 
-    private User user;
+    private UserModel userModel;
 
-    public UserPrincipal(User user){
-        this.user = user;
+    public UserPrincipal(UserModel userModel){
+        this.userModel = userModel;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<UserRoles> roles = user.getRoles();
+        Set<UserRolesModel> roles = userModel.getRoles();
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        for(UserRoles userRoles : roles){
-            authorities.add(new SimpleGrantedAuthority(userRoles.getRoles()));
+        for(UserRolesModel userRolesModel : roles){
+            authorities.add(new SimpleGrantedAuthority(userRolesModel.getRoles()));
         }
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userModel.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return userModel.getUsername();
     }
 
     @Override

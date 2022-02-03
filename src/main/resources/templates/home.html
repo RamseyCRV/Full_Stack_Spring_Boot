@@ -32,11 +32,11 @@
         
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/}">News</a></li>
-                <li><a th:href="@{/todos}">Todo's</a></li>
-                <li><a th:href="@{/notes}">Notes</a></li>
-                <li><a href="#">Coronavirus</a></li>
-                <li><a href="#">Stock Market</a></li>
+                <li class="active"><a th:href="@{/}" th:text="#{menu.name.news}"></a></li>
+                <li><a th:href="@{/todos}" th:text="#{menu.name.todoModel}"></a></li>
+                <li><a th:href="@{/notes}" th:text="#{menu.name.notes}"></a></li>
+                <li><a href="#" th:text="#{menu.name.coronavirus}"></a></li>
+                <li><a href="#" th:text="#{menu.name.stock}"></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -46,7 +46,7 @@
                         <span th:text="${#authentication.getPrincipal().getUsername()}">Guest</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a class="text-center" th:href="@{/profile}"><span class="glyphicon glyphicon-userModel"></span> Profile</a></li>
                         <li><a th:href="@{/signOut}" class="text-center"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
                     </ul>
                 </li>

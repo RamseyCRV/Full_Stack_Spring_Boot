@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Employee implements Serializable {
+public class EmployeeModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
